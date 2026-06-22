@@ -16,7 +16,7 @@ const Navbar = () => {
     // Better auth session
     const { data: session, isPending } = useSession()
     const user = session?.user || null;
-    console.log(user)
+    // console.log(user)
 
     // TODO : replace this with session
     const isLoggedIn = user;
@@ -110,7 +110,7 @@ const Navbar = () => {
                                     </Button>
                                 </Link>
 
-                                <Link href="#">
+                                <Link href="/auth/register">
                                     <Button variant='outline' className="text-white border-[#a06cd5] hover:bg-[#a06cd5]/10 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
                                         <PersonPlus /> Register
                                     </Button>
@@ -192,7 +192,7 @@ const Navbar = () => {
                                         <ArrowRightToSquare /> Login
                                     </Button>
                                 </Link>
-                                <Link href="#" className="w-full">
+                                <Link href="/auth/register" className="w-full">
                                     <Button variant='outline' className="text-white border-[#a06cd5] hover:bg-[#a06cd5]/10 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full py-2.5">
                                         <PersonPlus /> Register
                                     </Button>

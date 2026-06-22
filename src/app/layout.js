@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Common/Navbar";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Common/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +25,15 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-[#020b0a]">
         <Navbar />
-        {children}
 
+        {/* flex-1 দেওয়ার ফলে কন্টেন্ট পুরো জায়গা দখল করবে এবং ফুটার নিচে পুশ হবে */}
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+
+        <Footer />
         <Toaster />
       </body>
     </html>
