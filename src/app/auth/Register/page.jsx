@@ -20,16 +20,17 @@ export default function RegisterPage() {
 
         // Register Logic via better-auth client
         const { data, error } = await authClient.signUp.email({
-            email: userData.email,
+            name: userData.name.trim(),
+            email: userData.email.trim().toLowerCase(),
             password: userData.password,
-            name: userData.name,
             image: userData.image || undefined, // Optional field
         });
 
         console.log(data, error);
 
         if (!error) {
-            router.push("/");
+            // router.push("/");
+            window.location.href = "/";
         }
     };
 
@@ -105,12 +106,12 @@ export default function RegisterPage() {
                     <TextField
                         name="image"
                         type="url"
-                        validate={(value) => {
-                            if (value && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i.test(value)) {
-                                return "Please enter a valid image URL (e.g., .jpg, .png)";
-                            }
-                            return null;
-                        }}
+                        // validate={(value) => {
+                        //     if (value && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i.test(value)) {
+                        //         return "Please enter a valid image URL (e.g., .jpg, .png)";
+                        //     }
+                        //     return null;
+                        // }}
                     >
                         <Label className="text-[#e2cfea] font-medium">Profile Image URL <span className="text-xs text-[#a06cd5]">(Optional)</span></Label>
                         <Input
