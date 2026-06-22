@@ -3,16 +3,23 @@
 import React, { useState } from 'react';
 import { Thunderbolt, Bars, Xmark, ArrowRightToSquare, PersonPlus, ArrowRightFromSquare } from '@gravity-ui/icons';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '@heroui/react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Button, Spinner } from '@heroui/react';
 import Image from 'next/image';
+import { authClient, useSession } from '@/lib/auth-client';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const pathName = usePathname();
-    
+    const router = useRouter();
+
+    // Better auth session
+    const { data: session, isPending } = useSession()
+    const user = session?.user || null;
+    console.log(user)
+
     // TODO : replace this with session
-    const isLoggedIn = true;
+    const isLoggedIn = user;
 
     const navLinks = [
         { name: 'Home', href: '/' },
@@ -21,6 +28,14 @@ const Navbar = () => {
 
     if (isLoggedIn) {
         navLinks.push({ name: 'Dashboard', href: '/dashboard' });
+    }
+
+    const handleLogout = async () => {
+        console.log("Logging out...");
+        await authClient.signOut();
+        // router.push('/auth/login');
+        // router.refresh();
+        window.location.href = '/auth/login';
     }
 
     return (
@@ -61,25 +76,25 @@ const Navbar = () => {
 
                     {/* RIGHT: Desktop Authentication & Profile Conditional Rendering */}
                     <div className="hidden md:flex items-center gap-6">
-                        {isLoggedIn ? (
+                        {isPending ? <div className='text-white'><Spinner /></div> : isLoggedIn ? (
                             <>
                                 {/* Profile Avatar + Name (Visible when logged in) */}
                                 <div className='flex items-center gap-3'>
                                     <div className="relative w-10 h-10 rounded-full border-2 border-[#72b01d] cursor-pointer p-[2px] hover:scale-105 transition-transform duration-300">
                                         <Image
-                                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                                            alt="Profile"
+                                            src={user?.image || "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg"}
+                                            alt={user?.name}
                                             width={100}
                                             height={100}
                                             className="w-full h-full rounded-full object-cover"
                                         />
                                         <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-[#72b01d] ring-2 ring-[#102b3f]" />
                                     </div>
-                                    <h2 className='text-white font-semibold text-sm'>User Name</h2>
+                                    <h2 className='text-white font-semibold text-sm'>{user?.name}</h2>
                                 </div>
 
                                 {/* Logout Button */}
-                                <Button
+                                <Button onClick={handleLogout}
                                     variant='ghost'
                                     className="text-red-400 border border-red-500/20 hover:bg-red-500/10 rounded-lg font-bold transition-all duration-300 py-2.5"
                                 >
@@ -89,7 +104,7 @@ const Navbar = () => {
                         ) : (
                             /* Login & Register Buttons (Visible when logged out) */
                             <div className='flex gap-3'>
-                                <Link href="#">
+                                <Link href="/auth/login">
                                     <Button variant='primary' className="bg-[#a06cd5] text-white rounded-lg font-bold transition-all duration-300 transform hover:-translate-y-0.5 shadow-[0_4px_14px_rgba(160,108,213,0.3)]">
                                         <ArrowRightToSquare /> Login
                                     </Button>
@@ -148,7 +163,7 @@ const Navbar = () => {
                                 <div className="flex items-center gap-3 py-1">
                                     <div className="w-10 h-10 rounded-full border-2 border-[#72b01d] p-[2px]">
                                         <Image
-                                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                            src={user?.image || "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg"}
                                             alt="Profile"
                                             width={100}
                                             height={100}
@@ -156,13 +171,13 @@ const Navbar = () => {
                                         />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-[#ffffff]">User Profile</p>
-                                        <p className="text-xs text-[#72b01d]">Premium Active</p>
+                                        <p className="text-sm font-medium text-[#ffffff]">{user?.name}</p>
+                                        <p className="text-xs text-[#72b01d]">{user?.plan || "Free Plan"}</p>
                                     </div>
                                 </div>
 
                                 {/* Mobile Logout Button */}
-                                <Button
+                                <Button onClick={handleLogout}
                                     variant='ghost'
                                     className="w-full text-red-400 border border-red-500/20 hover:bg-red-500/10 rounded-lg font-bold transition-all duration-300 py-2.5"
                                 >
@@ -172,7 +187,7 @@ const Navbar = () => {
                         ) : (
                             /* Mobile Login & Register Buttons (Only when logged out) */
                             <>
-                                <Link href="#" className="w-full">
+                                <Link href="/auth/login" className="w-full">
                                     <Button variant='primary' className="bg-[#a06cd5] text-white rounded-lg font-bold transition-all duration-300 transform hover:-translate-y-0.5 w-full py-2.5">
                                         <ArrowRightToSquare /> Login
                                     </Button>
