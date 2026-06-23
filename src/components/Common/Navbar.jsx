@@ -27,7 +27,7 @@ const Navbar = () => {
     ];
 
     if (isLoggedIn) {
-        navLinks.push({ name: 'Dashboard', href: '/dashboard' });
+        navLinks.push({ name: 'Dashboard', href: `/dashboard/${user?.role}` });
     }
 
     const handleLogout = async () => {
@@ -36,6 +36,10 @@ const Navbar = () => {
         // router.push('/auth/login');
         // router.refresh();
         window.location.href = '/auth/login';
+    }
+
+    if (pathName.includes('dashboard')) {
+        return null;
     }
 
     return (

@@ -32,9 +32,16 @@ export default function LoginPage() {
             window.location.href = '/';
         }
         else {
-            toast.error("Error : Login failed");
+            toast.error("Invalid user or password");
         }
     };
+
+    // Login with google
+    const handleGoogleLogin = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
+    }
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-[#020617] overflow-hidden py-12 px-4 z-0">
@@ -133,7 +140,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Google Login Button */}
-                    <Button
+                    <Button onClick={handleGoogleLogin}
                         type="button"
                         variant="tertiary"
                         className="w-full bg-[#0f172a]/60 border border-[#10b981]/30 hover:border-[#10b981] hover:bg-[#10b981]/10 text-white font-medium py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"

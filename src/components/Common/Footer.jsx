@@ -3,10 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { Sparkles } from '@gravity-ui/icons';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
     // Current Year for Copyright
     const currentYear = new Date().getFullYear();
+
+    const pathName = usePathname()
+    if (pathName.includes('dashboard')) {
+        return null;
+    }
 
     return (
         <footer className="relative w-full pt-20 pb-8 bg-[#020b0a] border-t border-[#062726] overflow-hidden">

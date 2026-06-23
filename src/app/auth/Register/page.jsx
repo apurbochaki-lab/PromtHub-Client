@@ -6,6 +6,7 @@ import { Button, Description, FieldError, Form, Input, Label, TextField } from "
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
 
@@ -30,9 +31,20 @@ export default function RegisterPage() {
 
         if (!error) {
             // router.push("/");
+            toast.success("Register successful")
             window.location.href = "/";
         }
+        else {
+            toast.error("Register failed")
+        }
     };
+
+    // Register with google
+    const handleGoogleRegister = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
+    }
 
     return (
         <div className="relative min-h-screen flex items-center justify-center bg-[#062726] overflow-hidden py-12 px-4 z-0">
@@ -106,12 +118,12 @@ export default function RegisterPage() {
                     <TextField
                         name="image"
                         type="url"
-                        // validate={(value) => {
-                        //     if (value && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i.test(value)) {
-                        //         return "Please enter a valid image URL (e.g., .jpg, .png)";
-                        //     }
-                        //     return null;
-                        // }}
+                    // validate={(value) => {
+                    //     if (value && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i.test(value)) {
+                    //         return "Please enter a valid image URL (e.g., .jpg, .png)";
+                    //     }
+                    //     return null;
+                    // }}
                     >
                         <Label className="text-[#e2cfea] font-medium">Profile Image URL <span className="text-xs text-[#a06cd5]">(Optional)</span></Label>
                         <Input
@@ -179,7 +191,7 @@ export default function RegisterPage() {
                     </div>
 
                     {/* Google Login Button */}
-                    <Button
+                    <Button onClick={handleGoogleRegister}
                         type="button"
                         variant="tertiary"
                         className="w-full bg-[#062726]/60 border border-[#a06cd5]/30 hover:border-[#a06cd5] hover:bg-[#a06cd5]/10 text-[#ffffff] font-medium py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
