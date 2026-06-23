@@ -1,3 +1,20 @@
+My selected theme colors :
+
+#e2cfea
+#a06cd5
+#6247aa
+#102b3f
+#062726
+#4e148c
+#72b01d
+#ffffff
+#000000 
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -12,6 +12,9 @@ import {
 } from '@heroui/react';
 import { Plus, ArrowUpToLine, ChevronDown } from '@gravity-ui/icons';
 import { imageUpload } from '@/lib/core/imgUpload';
+import { getUserSession } from '@/lib/core/session';
+import toast from 'react-hot-toast';
+import { serverMutation } from '@/lib/core/server';
 
 const AddPromptForm = () => {
     // Dropdown এবং ফাইলের নামের জন্য স্টেট
@@ -26,8 +29,9 @@ const AddPromptForm = () => {
     const difficultyLevels = ['Beginner', 'Intermediate', 'Pro'];
 
     // Handle Form Submit
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        toast.success("Adding prompt...")
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         const image = await imageUpload(data?.image);
@@ -43,19 +47,26 @@ const AddPromptForm = () => {
         data.isPrivate = isPrivate;  // আমাদের স্টেট থেকে true/false পুশ করা হলো
 
         // --------------------------------------
+        const user = await getUserSession();
 
         const newData = {
             ...data,
-            image: image?.url,
+            image: image?.url || "https://thumbs.dreamstime.com/b/computer-displaying-ai-programming-code-screen-blurred-modern-office-background-computer-displaying-ai-programming-code-375635675.jpg",
+            creatorId: user?.id,
             // Default values
             status: "pending",
             copyCount: 0,
             rating: 0
         }
-        console.log("=== Form Submitted Data ===");
-        console.log(newData);
+        // console.log(newData);
+        
 
         // TODO: Backend POST Request logic will be placed here
+        const res = await serverMutation('/api/prompts', newData);
+        if (res.insertedId) {
+            toast.success("Prompt added")
+            e.target.reset();
+        }
     };
 
     return (
