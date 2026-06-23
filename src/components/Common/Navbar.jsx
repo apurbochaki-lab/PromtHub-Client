@@ -23,11 +23,11 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Home', href: '/' },
-        { name: 'All Prompts', href: '/all-prompts' },
+        { name: 'All Prompts', href: '/prompts' },
     ];
 
     if (isLoggedIn) {
-        navLinks.push({ name: 'Dashboard', href: `/dashboard/${user?.role}` });
+        navLinks.push({ name: 'Dashboard', href: `/dashboard/${user?.role}/my-profile` });
     }
 
     const handleLogout = async () => {
