@@ -17,9 +17,8 @@ import toast from "react-hot-toast";
 import { serverMutation } from "@/lib/core/server";
 
 const PromptDetailsClient = ({ prompt, currentSessionUser }) => {
-    console.log("Prompt from client: ", prompt)
+    // console.log("Prompt from client: ", prompt)
     const [isBookmarked, setIsBookmarked] = useState(prompt?.isBookmarked || false);
-    console.log("isBookmarked sate:", isBookmarked)
     const [isCopied, setIsCopied] = useState(false);
 
     // কপি ফাংশন এবং অ্যালার্ট
@@ -52,7 +51,7 @@ const PromptDetailsClient = ({ prompt, currentSessionUser }) => {
         // POST to database
         try {
             const response = await serverMutation("/api/prompts/bookmark", bookmarkData);
-            console.log("Response from Backend :", response)
+            // console.log("Response from Backend :", response)
 
             if (response.isBookmarked) {
                 toast.success("Prompt bookmarked! 🌟");
