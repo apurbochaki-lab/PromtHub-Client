@@ -1,15 +1,16 @@
 import PromptDetailsClient from "@/components/promt-details/PromptDetailsClient";
 import { getPromptById } from "@/lib/api/prompts";
+import { getUserSession } from "@/lib/core/session";
 
 
 const PromptDetailsPage = async ({ params }) => {
     const { id } = await params;
-    console.log("Prompt id :", id);
+    // console.log("Prompt id :", id);
 
-    // API থেকে সিগেল প্রম্পট ডেটা ফেচ করা
-    const promptDetails = await getPromptById(id);
+    const currentSessionUser = await getUserSession();
+    const userId = currentSessionUser?.id;
+    const promptDetails = await getPromptById(id, userId);
 
-    // যদি কোনো কারণে ডেটা না আসে
     if (!promptDetails) {
         return (
             <div className="min-h-screen flex items-center justify-center text-[#e2cfea] bg-[#062726]">
@@ -21,8 +22,7 @@ const PromptDetailsPage = async ({ params }) => {
     return (
         <main className="min-h-screen bg-gradient-to-br from-[#062726] to-[#102b3f] py-10 px-4 md:px-8">
             <div className="max-w-6xl mx-auto">
-                {/* ক্লায়েন্ট কম্পোনেন্টে ডেটা পাস করা হলো */}
-                <PromptDetailsClient prompt={promptDetails} />
+                <PromptDetailsClient prompt={promptDetails} currentSessionUser={currentSessionUser} />
             </div>
         </main>
     );

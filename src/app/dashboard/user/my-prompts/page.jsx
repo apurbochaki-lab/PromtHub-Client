@@ -7,7 +7,7 @@ const MyPromptsPage = async () => {
     const user = await getUserSession();
     const creatorId = user?.id || null;
 
-    const myPrompts = await getMyPrompts(creatorId);
+    const myPrompts = await getMyPrompts(creatorId) || [];
 
     return (
         // Added dark bg and relative wrapper for the glow

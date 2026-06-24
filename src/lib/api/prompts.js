@@ -4,8 +4,8 @@ export const getPrompts = async () => {
     return serverFetch('/api/prompts');
 }
 
-export const getPromptById = async (promptId) => {
-    return serverFetch(`/api/prompt-details/${promptId}`);
+export const getPromptById = async (promptId, userId) => {
+    return serverFetch(`/api/prompt-details/${promptId}?userId=${userId}`);
 }
 
 export const getMyPrompts = async (creatorId) => {

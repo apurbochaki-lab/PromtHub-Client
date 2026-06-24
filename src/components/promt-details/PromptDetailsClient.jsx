@@ -14,9 +14,12 @@ import {
 } from "@gravity-ui/icons";
 import { Button, Modal, Surface } from "@heroui/react";
 import toast from "react-hot-toast";
+import { serverMutation } from "@/lib/core/server";
 
-const PromptDetailsClient = ({ prompt }) => {
-    const [isBookmarked, setIsBookmarked] = useState(false);
+const PromptDetailsClient = ({ prompt, currentSessionUser }) => {
+    console.log("Prompt from client: ", prompt)
+    const [isBookmarked, setIsBookmarked] = useState(prompt?.isBookmarked || false);
+    console.log("isBookmarked sate:", isBookmarked)
     const [isCopied, setIsCopied] = useState(false);
 
     // কপি ফাংশন এবং অ্যালার্ট
@@ -29,6 +32,41 @@ const PromptDetailsClient = ({ prompt }) => {
             setIsCopied(false);
         }, 2500);
     };
+
+    const handleBookmark = async () => {
+        const previousBookmarkState = isBookmarked;
+        setIsBookmarked(!previousBookmarkState);
+
+        const promptId = prompt?._id;
+        const userId = currentSessionUser?.id;
+
+        const bookmarkData = {
+            promptId,
+            userId,
+            description: prompt?.description,
+            title: prompt?.title,
+            aiTool: prompt?.aiTool,
+            category: prompt?.category
+        }
+
+        // POST to database
+        try {
+            const response = await serverMutation("/api/prompts/bookmark", bookmarkData);
+            console.log("Response from Backend :", response)
+
+            if (response.isBookmarked) {
+                toast.success("Prompt bookmarked! 🌟");
+            } else {
+                toast.success("Bookmark removed! 🗑️");
+            }
+        }
+        catch (error) {
+            setIsBookmarked(previousBookmarkState);
+            toast.error("Something went wrong. Please try again.");
+            console.error("Bookmark Error:", error);
+        }
+
+    }
 
     const handleReport = () => {
         toast.error("Under construction⚠️")
@@ -56,7 +94,7 @@ const PromptDetailsClient = ({ prompt }) => {
                             <Button
                                 isIconOnly
                                 className="bg-[#062726]/50 hover:bg-[#6247aa]/30 border border-[#6247aa]/30 text-[#e2cfea] rounded-xl transition-all"
-                                onClick={() => setIsBookmarked(!isBookmarked)}
+                                onClick={handleBookmark}
                                 aria-label="Bookmark prompt"
                             >
                                 {isBookmarked ? (
