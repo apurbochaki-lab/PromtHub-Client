@@ -4,11 +4,14 @@ import { Card, Button } from "@heroui/react";
 import Link from "next/link";
 import { TrashBin } from "@gravity-ui/icons";
 import toast from "react-hot-toast";
+import { deleteBookmark } from "@/lib/actions/bookmark";
 
 const BookmarkCard = ({ bookmark }) => {
+    // console.log(bookmark._id)
 
-    const handleBookmarkDelete = () => {
-        toast.error("Under construction!⚠️")
+    const handleBookmarkDelete = async (bookmarkId) => {
+        const res = await deleteBookmark({ bookmarkId });
+        console.log(res)
     }
 
     return (
@@ -42,9 +45,9 @@ const BookmarkCard = ({ bookmark }) => {
 
             <Card.Footer className="p-5 pt-4 border-t border-[#72b01d]/10 mt-auto flex gap-3 items-center">
                 {/* ভিউ ডিটেইলস বাটন (বেশিরভাগ জায়গা নেবে) */}
-                <Link 
-                href={`/prompts/${bookmark?.promptId}`} 
-                className="w-full">
+                <Link
+                    href={`/prompts/${bookmark?.promptId}`}
+                    className="w-full">
                     <span>
                         <Button
                             className="w-full bg-[#72b01d]/10 text-[#95d542] hover:bg-[#72b01d] hover:text-white transition-colors rounded-xl font-medium"
@@ -56,7 +59,7 @@ const BookmarkCard = ({ bookmark }) => {
 
 
                 {/* ডিলিট বাটন (ডানপাশে ছোট করে থাকবে) */}
-                <Button onClick={handleBookmarkDelete}
+                <Button onClick={() => handleBookmarkDelete(bookmark?._id)}
                     isIconOnly
                     className="bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 rounded-xl transition-all duration-200"
                     aria-label="Delete Bookmark"

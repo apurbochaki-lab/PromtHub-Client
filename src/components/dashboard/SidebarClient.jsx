@@ -14,7 +14,7 @@ export default function SidebarClient({ role }) {
             { icon: Person, label: "My Profile", href: "/dashboard/user/my-profile" },
             { icon: BookOpen, label: "My Prompts", href: "/dashboard/user/my-prompts" },
             { icon: SquarePlus, label: "Add Prompt", href: "/dashboard/user/add-prompt" },
-            { icon: Bookmark, label: "Saved Prompts", href: "/dashboard/user/saved-prompts" },
+            { icon: Bookmark, label: "Saved Bookmarks", href: "/dashboard/user/saved-bookmarks" },
             { icon: Comment, label: "My Reviews", href: "/dashboard/user/my-reviews" }
         ],
         creator: [

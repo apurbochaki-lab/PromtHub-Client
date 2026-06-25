@@ -1,0 +1,10 @@
+'use server';
+
+import { revalidatePath } from "next/cache";
+import { serverMutation } from "../core/server";
+
+export const deleteBookmark = async (bookmarkId) => {
+    const data = serverMutation("/api/delete/my-bookmark", bookmarkId, "DELETE");
+    revalidatePath("/dashboard/user/saved-prompts");
+    return data;
+}

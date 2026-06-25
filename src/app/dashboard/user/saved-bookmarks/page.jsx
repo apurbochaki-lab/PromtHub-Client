@@ -27,7 +27,7 @@ const SavedPromptsPage = async () => {
                     </div>
                     <h3 className="text-white text-lg font-medium mb-1">No Bookmarks Found</h3>
                     <p className="text-[#8fbc8f] text-sm text-center">
-                        You haven't saved any prompts yet. Explore and bookmark your favorites!
+                        You haven&apos;t saved any prompts yet. Explore and bookmark your favorites!
                     </p>
                 </div>
             ) : (
