@@ -1,6 +1,9 @@
+
 import React from 'react';
 
-const SavedPromptsPage = () => {
+const SavedPromptsPage = async () => {
+
+
     return (
         <div>
             My review page

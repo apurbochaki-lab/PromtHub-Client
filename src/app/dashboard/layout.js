@@ -23,7 +23,7 @@ export const DashboardLayout = async({ children }) => {
                     <h1 className="font-bold text-sm lg:text-lg tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-[#a1bfa1] pl-10 md:pl-0">
                         Welcome {user?.name}
                     </h1>
-                    {user?.plan === "pro" && <span className="flex items-center gap-2 text-green-500 font-semibold">
+                    {user?.plan === "pro" && <span className="flex items-center gap-2  text-yellow-300 font-semibold">
                         <CrownDiamond/> Premium
                     </span>}
                 </header>
