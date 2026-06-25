@@ -7,6 +7,7 @@ import {
     CrownDiamond,
     StarFill
 } from "@gravity-ui/icons";
+import Link from "next/link";
 
 const MyProfilePage = async () => {
 
@@ -70,11 +71,11 @@ const MyProfilePage = async () => {
                         {/* Role & Plan Badges */}
                         <div className="flex items-center gap-3 w-full justify-center pt-6 border-t border-[#72b01d]/10">
                             <span className="px-4 py-1.5 bg-[#044a2b]/30 border border-[#72b01d]/20 text-[#8fbc8f] rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
-                              <Person size={12} /> Role: {user?.role}
+                                <Person size={12} /> Role: {user?.role}
                             </span>
                             <span className={`px-4 py-1.5 border rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 ${user?.plan === "pro" ? "bg-[#72b01d]/20 border-[#72b01d]/50 text-[#72b01d]" : "bg-gray-800/30 border-gray-600/30 text-gray-400"}`}>
                                 {user?.plan === "pro" ? <StarFill size={12} /> : null}
-                               Plan: {user?.plan}
+                                Plan: {user?.plan}
                             </span>
                         </div>
                     </div>
@@ -119,9 +120,10 @@ const MyProfilePage = async () => {
                                     </p>
                                 </div>
 
-                                <button className="relative z-10 w-full sm:w-auto whitespace-nowrap bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.3)] hover:shadow-[0_0_30px_rgba(149,213,66,0.5)] transform hover:-translate-y-0.5 cursor-pointer">
+                                <Link href="/pricing" 
+                                className="relative z-10 w-full sm:w-auto whitespace-nowrap bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.3)] hover:shadow-[0_0_30px_rgba(149,213,66,0.5)] transform hover:-translate-y-0.5 cursor-pointer">
                                     Upgrade Now $5
-                                </button>
+                                </Link>
                             </div>
                         )}
 

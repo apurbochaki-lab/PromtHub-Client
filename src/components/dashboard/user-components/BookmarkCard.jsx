@@ -3,8 +3,7 @@
 import { Card, Button } from "@heroui/react";
 import Link from "next/link";
 import { TrashBin } from "@gravity-ui/icons";
-import toast from "react-hot-toast";
-import { deleteBookmark } from "@/lib/actions/bookmark";
+import { deleteBookmark } from "@/lib/actions/userDashboard";
 
 const BookmarkCard = ({ bookmark }) => {
     // console.log(bookmark._id)

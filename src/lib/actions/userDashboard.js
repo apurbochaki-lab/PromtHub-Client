@@ -8,3 +8,9 @@ export const deleteBookmark = async (bookmarkId) => {
     revalidatePath("/dashboard/user/saved-prompts");
     return data;
 }
+
+export const copyCount = async (promptId) => {
+    const data = serverMutation("/api/prompts/copy-count", promptId, "PATCH");
+    revalidatePath(`/prompts/${promptId}`);
+    return data;
+}

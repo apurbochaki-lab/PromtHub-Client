@@ -16,17 +16,26 @@ import {
 import { Button, Modal, Surface } from "@heroui/react";
 import toast from "react-hot-toast";
 import { serverMutation } from "@/lib/core/server";
+import { copyCount } from "@/lib/actions/userDashboard";
 
 const PromptDetailsClient = ({ prompt, currentSessionUser }) => {
-    console.log("Prompt from client: ", prompt)
+
     const [isBookmarked, setIsBookmarked] = useState(prompt?.isBookmarked || false);
     const [isCopied, setIsCopied] = useState(false);
 
-    // কপি ফাংশন এবং অ্যালার্ট
-    const handleCopy = () => {
+
+    const handleCopy = async () => {
         navigator.clipboard.writeText(prompt.content);
         setIsCopied(true);
         toast.success("Prompt copied")
+
+        try {
+            const res = await copyCount({ promptId: prompt?._id });
+            console.log(res)
+        }
+        catch (error) {
+
+        }
 
         setTimeout(() => {
             setIsCopied(false);
@@ -98,7 +107,7 @@ const PromptDetailsClient = ({ prompt, currentSessionUser }) => {
 
                     {/* Upgrade Button */}
                     <div className="relative z-10 space-y-4">
-                        <Link href="/pricing" className="block">
+                        <Link href={`/pricing?redirect=prompts/${prompt?._id}`} className="block">
                             <Button className="w-full bg-gradient-to-r from-[#6247aa] to-[#a06cd5] hover:from-[#a06cd5] hover:to-[#6247aa] text-[#ffffff] font-bold text-base py-6 rounded-xl border border-[#e2cfea]/20 shadow-xl transition-all hover:scale-[1.02]">
                                 Upgrade to Premium
                             </Button>
