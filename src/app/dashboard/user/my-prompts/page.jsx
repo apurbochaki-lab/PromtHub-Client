@@ -10,6 +10,7 @@ const MyPromptsPage = async () => {
     const creatorId = user?.id || null;
 
     const myPrompts = await getMyPrompts(creatorId) || [];
+    console.log(myPrompts.length)
 
     return (
         // Added dark bg and relative wrapper for the glow

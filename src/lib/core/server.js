@@ -1,15 +1,6 @@
-import { authClient } from "../auth-client";
+import { authHeaderClient } from "./Token/getTokenClient";
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
-
-export const authHeader = async () => {
-    const { data: tokenData } = await authClient.token()
-    const token = tokenData?.token;
-    const headers = {
-        authorization: `Bearer ${token}`
-    }
-    return headers;
-}
 
 export const serverMutation = async (path, data, method = 'POST') => {
 
@@ -17,7 +8,7 @@ export const serverMutation = async (path, data, method = 'POST') => {
         method: method,
         headers: {
             'Content-Type': 'application/json',
-            ...await authHeader()
+            ...await authHeaderClient()
         },
         body: JSON.stringify(data),
     });

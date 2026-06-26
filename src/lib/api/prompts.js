@@ -1,7 +1,8 @@
 import { serverFetch } from "../core/server"
+import { protectedFetch } from "../core/Token/getTokenServer";
 
 export const getPrompts = async () => {
-    return serverFetch('/api/prompts');
+    return protectedFetch('/api/prompts');
 }
 
 export const getPromptById = async (promptId, userId) => {
@@ -9,5 +10,5 @@ export const getPromptById = async (promptId, userId) => {
 }
 
 export const getMyPrompts = async (creatorId) => {
-    return serverFetch(`/api/my-prompts?creatorId=${creatorId}`);
+    return protectedFetch(`/api/my-prompts?creatorId=${creatorId}`);
 }

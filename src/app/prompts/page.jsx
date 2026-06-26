@@ -1,9 +1,12 @@
 import PromptCard from "@/components/Common/PromptCard";
 import { getPrompts } from "@/lib/api/prompts";
+import { authHeaderServer } from "@/lib/core/Token/getTokenServer";
 import { Magnifier, Sliders } from "@gravity-ui/icons";
 
 const AllPromptsPage = async () => {
-    // API থেকে সব প্রম্পট ডেটা ফেচ করা হচ্ছে
+    // const token = await getTokenServer()
+    // console.log("TOken from server :", token)
+
     const prompts = await getPrompts() || [];
 
     return (

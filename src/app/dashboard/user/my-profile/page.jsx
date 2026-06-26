@@ -12,6 +12,7 @@ import Link from "next/link";
 const MyProfilePage = async () => {
 
     const currentUser = await getUserSession();
+    console.log(currentUser)
 
     const user = currentUser || {
         name: "Not found",
