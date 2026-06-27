@@ -1,3 +1,4 @@
+import { getMyPrompts } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
 import {
     Person,
@@ -12,7 +13,9 @@ import Link from "next/link";
 const MyProfilePage = async () => {
 
     const currentUser = await getUserSession();
-    console.log(currentUser)
+    const creatorId = currentUser?.id || null;
+    const myPrompts = (await getMyPrompts(creatorId)) || [];
+    const myPostCount = myPrompts.length;
 
     const user = currentUser || {
         name: "Not found",
@@ -92,7 +95,7 @@ const MyProfilePage = async () => {
                                     <Files size={20} />
                                 </div>
                                 <p className="text-[#8fbc8f] text-xs font-bold uppercase tracking-widest mb-1">Prompts Published</p>
-                                <h3 className="text-3xl font-extrabold text-[#ffffff]">{user?.promptsPublished || 0}</h3>
+                                <h3 className="text-3xl font-extrabold text-[#ffffff]">{myPostCount || 0}</h3>
                             </div>
 
                             {/* Account Status Stat */}
@@ -121,8 +124,8 @@ const MyProfilePage = async () => {
                                     </p>
                                 </div>
 
-                                <Link href="/pricing" 
-                                className="relative z-10 w-full sm:w-auto whitespace-nowrap bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.3)] hover:shadow-[0_0_30px_rgba(149,213,66,0.5)] transform hover:-translate-y-0.5 cursor-pointer">
+                                <Link href="/pricing"
+                                    className="relative z-10 w-full sm:w-auto whitespace-nowrap bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.3)] hover:shadow-[0_0_30px_rgba(149,213,66,0.5)] transform hover:-translate-y-0.5 cursor-pointer">
                                     Upgrade Now $5
                                 </Link>
                             </div>

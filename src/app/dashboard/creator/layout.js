@@ -5,7 +5,7 @@ const AdminLayout = async ({ children }) => {
     const user = await getUserSession();
 
     if (!user) {
-        redirect("/login");
+        redirect("/auth/login");
     }
 
     if (user.role !== "creator") {

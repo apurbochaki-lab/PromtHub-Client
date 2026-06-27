@@ -11,6 +11,7 @@ export default function SidebarClient({ role }) {
 
     const dashboardNavLinks = {
         user: [
+            { icon: House, label: "Home", href: "/" },
             { icon: Person, label: "My Profile", href: "/dashboard/user/my-profile" },
             { icon: BookOpen, label: "My Prompts", href: "/dashboard/user/my-prompts" },
             { icon: SquarePlus, label: "Add Prompt", href: "/dashboard/user/add-prompt" },
@@ -18,12 +19,14 @@ export default function SidebarClient({ role }) {
             { icon: Comment, label: "My Reviews", href: "/dashboard/user/my-reviews" }
         ],
         creator: [
+            { icon: House, label: "Home", href: "/" },
             { icon: Person, label: "My Profile", href: "/dashboard/creator/my-profile" },
-            { icon: House, label: "Creator Home", href: "/dashboard/creator/home" },
+            { icon: House, label: "Creator Home", href: "/dashboard/creator/creator-home" },
             { icon: Plus, label: "Add Prompt", href: "/dashboard/creator/add-prompt" },
             { icon: Layers, label: "My Prompts", href: "/dashboard/creator/my-prompts" }
         ],
         admin: [
+            { icon: House, label: "Home", href: "/" },
             { icon: Person, label: "My Profile", href: "/dashboard/admin/my-profile" },
             { icon: Persons, label: "All Users", href: "/dashboard/admin/all-users" },
             { icon: Books, label: "All Prompts", href: "/dashboard/admin/all-prompts" },
@@ -72,8 +75,8 @@ export default function SidebarClient({ role }) {
                                 href={item.href}
                                 key={item.label}
                                 className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300 ${isActive
-                                        ? 'bg-gradient-to-r from-[#72b01d]/20 to-transparent border-l-4 border-[#72b01d] text-[#72b01d] shadow-[inset_10px_0_20px_rgba(114,176,29,0.05)]'
-                                        : 'text-[#8fbc8f] hover:bg-[#72b01d]/10 hover:text-white border-l-4 border-transparent'
+                                    ? 'bg-gradient-to-r from-[#72b01d]/20 to-transparent border-l-4 border-[#72b01d] text-[#72b01d] shadow-[inset_10px_0_20px_rgba(114,176,29,0.05)]'
+                                    : 'text-[#8fbc8f] hover:bg-[#72b01d]/10 hover:text-white border-l-4 border-transparent'
                                     }`}
                             >
                                 <item.icon className={`size-5 ${isActive ? 'text-[#72b01d]' : 'text-[#8fbc8f] group-hover:text-white'}`} />
@@ -98,6 +101,24 @@ export default function SidebarClient({ role }) {
 
                         <Drawer.Body className="pt-6 px-4 bg-[#020604] flex-1 overflow-y-auto">
                             <nav className="flex flex-col gap-2">
+
+                                <div className="pb-6 md:pb-12 px-2">
+                                    <Link href="/" className="flex-shrink-0 flex items-center gap-2 md:gap-3 cursor-pointer group">
+
+                                        {/* Icon Container: Reduced from w-10 h-10 to w-8 h-8 on mobile */}
+                                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-br from-[#72b01d] to-[#044a2b] flex items-center justify-center shadow-[0_0_15px_rgba(114,176,29,0.3)] md:shadow-[0_0_20px_rgba(114,176,29,0.4)] group-hover:scale-105 transition-all duration-300">
+                                            {/* Icon Size: Made slightly smaller for mobile */}
+                                            <Thunderbolt className="text-[#ffffff]" py={1} size={16} />
+                                        </div>
+
+                                        {/* Text Size: Reduced from text-2xl to text-lg/xl on mobile */}
+                                        <span className="text-[#ffffff] text-lg md:text-2xl font-extrabold tracking-wide transition-all duration-300">
+                                            Prompt<span className="text-[#72b01d] group-hover:text-[#95d542] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(114,176,29,0.5)]">Hub</span>
+                                        </span>
+
+                                    </Link>
+                                </div>
+
                                 {navItems.map((item) => {
                                     const isActive = pathname === item.href;
 
@@ -106,8 +127,8 @@ export default function SidebarClient({ role }) {
                                             key={item.label}
                                             href={item.href}
                                             className={`flex items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold transition-all duration-300 ${isActive
-                                                    ? 'bg-gradient-to-r from-[#72b01d]/20 to-transparent border-l-4 border-[#72b01d] text-[#72b01d]'
-                                                    : 'text-[#8fbc8f] hover:bg-[#72b01d]/10 hover:text-white border-l-4 border-transparent'
+                                                ? 'bg-gradient-to-r from-[#72b01d]/20 to-transparent border-l-4 border-[#72b01d] text-[#72b01d]'
+                                                : 'text-[#8fbc8f] hover:bg-[#72b01d]/10 hover:text-white border-l-4 border-transparent'
                                                 }`}
                                         >
                                             <item.icon className={`size-5 ${isActive ? 'text-[#72b01d]' : 'text-[#8fbc8f]'}`} />

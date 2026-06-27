@@ -2,7 +2,7 @@ import { serverFetch } from "../core/server"
 import { protectedFetch } from "../core/Token/getTokenServer";
 
 export const getPrompts = async () => {
-    return protectedFetch('/api/prompts');
+    return protectedFetch("/api/prompts?status=approved");
 }
 
 export const getPromptById = async (promptId, userId) => {

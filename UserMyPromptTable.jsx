@@ -13,9 +13,8 @@ import {
     Xmark
 } from "@gravity-ui/icons";
 import Link from "next/link";
-import toast from "react-hot-toast";
 
-const PromptsTableClient = ({ prompts }) => {
+const PromptsTableClientOld = ({ prompts }) => {
     const [selectedAnalytics, setSelectedAnalytics] = useState(null);
 
     // Conditional UI for Status
@@ -31,17 +30,11 @@ const PromptsTableClient = ({ prompts }) => {
         }
     };
 
-    const handlePromptUpdate = () => {
-        toast.success("Edit clicked")
-
-        
-    }
-
     return (
         // Added 'dark' class and forced global text-white to kill light mode defaults
         <div className=" text-white border border-[#72b01d]/50 rounded-xl shadow-2xl p-4 w-full">
 
-            <Table
+            <Table 
                 variant="primary"
                 className="bg-[#0b1410] border-none"
                 classnames={{
@@ -117,14 +110,9 @@ const PromptsTableClient = ({ prompts }) => {
                                                 <Link href={`/prompts/${prompt?._id}`} className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2.5 rounded-lg border border-transparent hover:border-[#72b01d]/30" title="View Details">
                                                     <Eye width={18} />
                                                 </Link>
-
-                                                {/* Edit Data (Update CRUD) */}
-                                                <Button onClick={handlePromptUpdate}
-                                                variant="outline" className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
+                                                <Button variant="outline" className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
                                                     <Pencil width={18} />
                                                 </Button>
-
-
                                                 <Button variant="outline"
                                                     onClick={() => setSelectedAnalytics(prompt)}
                                                     className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30"
@@ -237,4 +225,4 @@ const PromptsTableClient = ({ prompts }) => {
     );
 };
 
-export default PromptsTableClient;
+export default PromptsTableClientOld;

@@ -10,6 +10,7 @@ const MyPromptsPage = async () => {
     const creatorId = user?.id || null;
 
     const myPrompts = await getMyPrompts(creatorId) || [];
+    console.log(myPrompts)
     console.log(myPrompts.length)
 
     return (
@@ -33,7 +34,7 @@ const MyPromptsPage = async () => {
                             </p>
                         </div>
 
-                        <Link href="/dashboard/user/add-prompt">
+                        <Link href="/dashboard/creator/add-prompt">
                             <span>
                                 <Button className="bg-green-800 font-semibold hover:bg-green-700">
                                     Add Prompt

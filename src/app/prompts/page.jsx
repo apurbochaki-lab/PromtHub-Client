@@ -8,6 +8,7 @@ const AllPromptsPage = async () => {
     // console.log("TOken from server :", token)
 
     const prompts = await getPrompts() || [];
+    // console.log(prompts)
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#062726] via-[#0b1a1f] to-[#102b3f] text-white py-12 px-4 sm:px-6 md:px-8 pb-30">
