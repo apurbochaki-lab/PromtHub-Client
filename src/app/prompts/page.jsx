@@ -1,11 +1,8 @@
 import PromptCard from "@/components/Common/PromptCard";
 import { getPrompts } from "@/lib/api/prompts";
-import { authHeaderServer } from "@/lib/core/Token/getTokenServer";
 import { Magnifier, Sliders } from "@gravity-ui/icons";
 
 const AllPromptsPage = async () => {
-    // const token = await getTokenServer()
-    // console.log("TOken from server :", token)
 
     const prompts = await getPrompts() || [];
     // console.log(prompts)

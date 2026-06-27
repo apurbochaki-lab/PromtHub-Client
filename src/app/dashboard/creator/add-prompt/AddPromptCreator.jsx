@@ -53,10 +53,16 @@ const AddPromptCreator = ({ user }) => {
             ...data,
             image: image?.url || "https://thumbs.dreamstime.com/b/computer-displaying-ai-programming-code-screen-blurred-modern-office-background-computer-displaying-ai-programming-code-375635675.jpg",
             creatorId: user?.id,
+            creatorName: user?.name,
+            creatorEmail: user?.email,
+            
+            // Default data
             status: "pending",
             copyCount: 0,
             bookmarkCount: 0,
-            rating: 0
+            rating: 0,
+            ratingSum: 0,
+            reviewCount: 0
         };
 
         console.log(newData)

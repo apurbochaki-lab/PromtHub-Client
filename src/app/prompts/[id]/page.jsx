@@ -1,4 +1,5 @@
 import PromptDetailsClient from "@/components/promt-details/PromptDetailsClient";
+import { getRecentReviews } from "@/lib/api/details-page";
 import { getPromptById } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
 import { ArrowLeft, Lock } from "@gravity-ui/icons";
@@ -10,9 +11,11 @@ const PromptDetailsPage = async ({ params }) => {
     // console.log("Prompt id :", id);
 
     const currentSessionUser = await getUserSession();
-    console.log(currentSessionUser)
     const userId = currentSessionUser?.id;
     const promptDetails = await getPromptById(id, userId);
+
+    // Recent reviews
+    const recentReviews = await getRecentReviews(id);
 
     if (!promptDetails) {
         return (
@@ -75,7 +78,11 @@ const PromptDetailsPage = async ({ params }) => {
     return (
         <main className="min-h-screen bg-gradient-to-br from-[#062726] to-[#102b3f] py-10 px-4 md:px-8">
             <div className="max-w-6xl mx-auto">
-                <PromptDetailsClient prompt={promptDetails} currentSessionUser={currentSessionUser} />
+                <PromptDetailsClient
+                    prompt={promptDetails}
+                    currentSessionUser={currentSessionUser}
+                    recentReviews={recentReviews}
+                />
             </div>
         </main>
     );

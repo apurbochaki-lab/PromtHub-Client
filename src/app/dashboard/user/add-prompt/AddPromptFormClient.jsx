@@ -14,6 +14,7 @@ import { Plus, ArrowUpToLine, ChevronDown } from '@gravity-ui/icons';
 import { imageUpload } from '@/lib/core/imgUpload';
 import toast from 'react-hot-toast';
 import { serverMutation } from '@/lib/core/server';
+import { useRouter } from 'next/navigation';
 
 const AddPromptFormClient = ({ user }) => {
     const [category, setCategory] = useState('Coding');
@@ -26,7 +27,7 @@ const AddPromptFormClient = ({ user }) => {
     const aiTools = ['ChatGPT', 'Gemini', 'Midjourney', 'Claude', 'DALL-E'];
     const difficultyLevels = ['Beginner', 'Intermediate', 'Pro'];
 
-
+    const router = useRouter()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,10 +52,14 @@ const AddPromptFormClient = ({ user }) => {
             ...data,
             image: image?.url || "https://thumbs.dreamstime.com/b/computer-displaying-ai-programming-code-screen-blurred-modern-office-background-computer-displaying-ai-programming-code-375635675.jpg",
             creatorId: user?.id,
+            creatorName: user?.name,
+            creatorEmail: user?.email,
             status: "pending",
             copyCount: 0,
             bookmarkCount: 0,
-            rating: 0
+            rating: 0,
+            ratingSum: 0,
+            reviewCount: 0
         };
 
         const res = await serverMutation('/api/prompts', newData);
@@ -63,8 +68,9 @@ const AddPromptFormClient = ({ user }) => {
             toast.success("Prompt added");
             e.target.reset();
             setFileName(null);
+            router.push("/dashboard/user/my-prompts")
         } else {
-            toast.error("Limit Sesh");
+            toast.error("Error. Try again later");
         }
     };
 
