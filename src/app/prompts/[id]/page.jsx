@@ -2,9 +2,7 @@ import PromptDetailsClient from "@/components/promt-details/PromptDetailsClient"
 import { getRecentReviews } from "@/lib/api/details-page";
 import { getPromptById } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
-import { ArrowLeft, Lock } from "@gravity-ui/icons";
-import { Button } from "@heroui/react";
-import Link from "next/link";
+
 
 const PromptDetailsPage = async ({ params }) => {
     const { id } = await params;

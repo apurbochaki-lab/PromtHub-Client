@@ -24,10 +24,11 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', href: '/' },
         { name: 'All Prompts', href: '/prompts' },
+        { name: 'Pricing', href: '/pricing' },
     ];
 
     if (isLoggedIn) {
-        navLinks.push({ name: 'Dashboard', href: `/dashboard/${user?.role}/my-profile` });
+        navLinks.push({ name: 'Dashboard', href: `/dashboard/${user?.role}/my-profile`, classname: 'text-green-500' });
     }
 
     const handleLogout = async () => {
@@ -66,7 +67,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className={`font-bold text-lg transition-colors duration-300 relative group py-2 ${isActive ? 'text-[#ffffff]' : 'text-[#e2cfea] hover:text-[#ffffff]'
+                                    className={`font-bold text-lg transition-colors duration-300 relative group py-2 ${link?.classname} ${isActive ? 'text-[#ffffff]' : 'text-[#e2cfea] hover:text-[#ffffff]'
                                         }`}
                                 >
                                     {link.name}

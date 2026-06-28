@@ -5,8 +5,14 @@ import GeminiPromptPreview from "@/components/homepage/GeminiPromptPreview";
 import SupportedAITools from "@/components/homepage/SupportedAITools";
 import TopCreators from "@/components/homepage/TopCreators";
 import WhyChooseUs from "@/components/homepage/WhyChooseUs";
+import { getLimitReviews } from "@/lib/api/prompt-review-public";
+import { topCreators } from "@/lib/api/top-creators";
 
-export default function Home() {
+export default async function Home() {
+
+  const creators = await topCreators()
+  const reviews = await getLimitReviews()
+
   return (
     <div className="min-h-screen">
       <Banner />
@@ -14,8 +20,8 @@ export default function Home() {
       <GeminiPromptPreview />
       <WhyChooseUs />
       <SupportedAITools />
-      <TopCreators />
-      <CustomerReviews />
+      <TopCreators creators={creators} />
+      <CustomerReviews reviews={reviews} />
     </div>
   );
 }

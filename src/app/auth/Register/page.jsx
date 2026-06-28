@@ -7,10 +7,9 @@ import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function RegisterPage() {
-
-    const router = useRouter();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -47,24 +46,24 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center bg-[#062726] overflow-hidden py-12 px-4 z-0">
+        <div className="relative min-h-screen flex items-center justify-center bg-[#09090b] overflow-hidden pt-12 pb-28 px-4 z-0">
 
             {/* --- Background Blurry Glow Effects --- */}
-            <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#a06cd5] rounded-full mix-blend-screen filter blur-[130px] opacity-30 z-[-1] animate-pulse"></div>
-            <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#4e148c] rounded-full mix-blend-screen filter blur-[130px] opacity-40 z-[-1] animate-pulse delay-700"></div>
+            <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#a06cd5] rounded-full mix-blend-screen filter blur-[150px] opacity-20 z-[-1] animate-pulse"></div>
+            <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#4e148c] rounded-full mix-blend-screen filter blur-[150px] opacity-30 z-[-1] animate-pulse delay-700"></div>
 
             {/* --- Glassmorphism Form Card --- */}
-            <div className="w-full max-w-md bg-[#102b3f]/70 backdrop-blur-xl border border-[#a06cd5]/30 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.6)] z-10 relative">
+            <div className="w-full max-w-md bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-3xl p-8 shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10 relative">
 
                 {/* Header Section */}
                 <div className="flex flex-col items-center justify-center mb-8 text-center">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#a06cd5] to-[#4e148c] flex items-center justify-center shadow-[0_0_20px_rgba(160,108,213,0.5)] mb-4">
-                        <Thunderbolt className="text-[#ffffff]" size={24} />
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#a06cd5] to-[#4e148c] flex items-center justify-center shadow-[0_0_25px_rgba(160,108,213,0.4)] mb-4 border border-white/10">
+                        <Thunderbolt className="text-white" size={26} />
                     </div>
-                    <h2 className="text-2xl font-bold text-[#ffffff] tracking-wide">
+                    <h2 className="text-2xl font-bold text-white tracking-wide">
                         Create Account
                     </h2>
-                    <p className="text-[#e2cfea] text-sm mt-1">
+                    <p className="text-gray-400 text-sm mt-2">
                         Join us to explore the best prompts.
                     </p>
                 </div>
@@ -84,13 +83,13 @@ export default function RegisterPage() {
                             return null;
                         }}
                     >
-                        <Label className="text-[#e2cfea] font-medium">Full Name</Label>
+                        <Label className="text-gray-300 font-medium mb-1">Full Name</Label>
                         <Input
                             placeholder="John Doe"
-                            className="bg-[#062726]/50 text-white rounded-xl placeholder:text-[#e2cfea]/50 border-none"
+                            className="bg-black/30 text-white rounded-xl placeholder:text-gray-600 border border-white/5 hover:border-white/10 transition-colors"
                             startcontent={<Person className="text-[#a06cd5] mr-2" size={18} />}
                         />
-                        <FieldError className="text-red-400 text-xs" />
+                        <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
                     {/* 2. Email Field */}
@@ -105,33 +104,29 @@ export default function RegisterPage() {
                             return null;
                         }}
                     >
-                        <Label className="text-[#e2cfea] font-medium">Email Address</Label>
+                        <Label className="text-gray-300 font-medium mb-1">Email Address</Label>
                         <Input
                             placeholder="john@example.com"
-                            className="bg-[#062726]/50 text-white rounded-xl placeholder:text-[#e2cfea]/50 border-none"
+                            className="bg-black/30 text-white rounded-xl placeholder:text-gray-600 border border-white/5 hover:border-white/10 transition-colors"
                             startcontent={<Envelope className="text-[#a06cd5] mr-2" size={18} />}
                         />
-                        <FieldError className="text-red-400 text-xs" />
+                        <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
                     {/* 3. Profile Image URL (Optional) */}
                     <TextField
                         name="image"
                         type="url"
-                    // validate={(value) => {
-                    //     if (value && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i.test(value)) {
-                    //         return "Please enter a valid image URL (e.g., .jpg, .png)";
-                    //     }
-                    //     return null;
-                    // }}
                     >
-                        <Label className="text-[#e2cfea] font-medium">Profile Image URL <span className="text-xs text-[#a06cd5]">(Optional)</span></Label>
+                        <Label className="text-gray-300 font-medium mb-1">
+                            Profile Image URL <span className="text-xs text-[#a06cd5] font-normal ml-1">(Optional)</span>
+                        </Label>
                         <Input
                             placeholder="https://example.com/avatar.jpg"
-                            className="bg-[#062726]/50 text-white rounded-xl placeholder:text-[#e2cfea]/50 border-none"
+                            className="bg-black/30 text-white rounded-xl placeholder:text-gray-600 border border-white/5 hover:border-white/10 transition-colors"
                             startcontent={<LinkIcon className="text-[#a06cd5] mr-2" size={18} />}
                         />
-                        <FieldError className="text-red-400 text-xs" />
+                        <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
                     {/* 4. Password Field */}
@@ -153,52 +148,66 @@ export default function RegisterPage() {
                             return null;
                         }}
                     >
-                        <Label className="text-[#e2cfea] font-medium">Password</Label>
+                        <Label className="text-gray-300 font-medium mb-1">Password</Label>
                         <Input
                             placeholder="Enter a strong password"
-                            className="bg-[#062726]/50 text-white rounded-xl placeholder:text-[#e2cfea]/50 border-none"
+                            className="bg-black/30 text-white rounded-xl placeholder:text-gray-600 border border-white/5 hover:border-white/10 transition-colors"
                             startcontent={<Lock className="text-[#a06cd5] mr-2" size={18} />}
                         />
-                        <Description className="text-xs text-[#e2cfea]/70">Must be at least 8 characters with 1 uppercase & 1 number</Description>
-                        <FieldError className="text-red-400 text-xs" />
+                        <Description className="text-xs text-gray-500 mt-1">Must be at least 8 characters with 1 uppercase & 1 number</Description>
+                        <FieldError className="text-red-400 text-xs mt-1" />
                     </TextField>
 
                     {/* Submit and Reset Buttons */}
                     <div className="flex gap-3 mt-4">
-                        <Button
-                            type="submit"
-                            className="flex-1 bg-[#a06cd5] hover:bg-[#6247aa] text-[#ffffff] font-bold py-3 rounded-xl shadow-[0_4px_20px_rgba(160,108,213,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
-                        >
-                            <Check size={18} />
-                            Register
-                        </Button>
 
                         <Button
                             type="reset"
                             variant="outline"
-                            className="flex-1 border-[#a06cd5] text-[#e2cfea] hover:bg-[#a06cd5]/10 hover:text-white font-semibold py-3 rounded-xl transition-all duration-300"
+                            className="flex-1 border-gray-600 text-gray-300 hover:bg-white/5 hover:text-white hover:border-gray-400 font-semibold py-3 rounded-xl transition-all duration-300"
                         >
                             <Xmark size={18} />
                             Reset
+                        </Button>
+
+                        <Button
+                            type="submit"
+                            className="flex-1 bg-[#a06cd5] hover:bg-[#b07dec] text-white font-bold py-3 rounded-xl shadow-[0_4px_20px_rgba(160,108,213,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 border border-[#a06cd5]/50"
+                        >
+                            <Check size={18} />
+                            Register
                         </Button>
                     </div>
 
                     {/* OR Divider */}
                     <div className="flex items-center gap-4 w-full mt-2">
-                        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#a06cd5]/50"></div>
-                        <span className="text-[#e2cfea]/70 text-sm font-medium">OR</span>
-                        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#a06cd5]/50"></div>
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gray-600"></div>
+                        <span className="text-gray-400 text-sm font-medium">OR</span>
+                        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gray-600"></div>
                     </div>
 
                     {/* Google Login Button */}
                     <Button onClick={handleGoogleRegister}
                         type="button"
                         variant="tertiary"
-                        className="w-full bg-[#062726]/60 border border-[#a06cd5]/30 hover:border-[#a06cd5] hover:bg-[#a06cd5]/10 text-[#ffffff] font-medium py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+                        className="w-full bg-black/20 border border-white/10 hover:border-[#a06cd5]/50 hover:bg-[#a06cd5]/10 text-white font-medium py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
                     >
                         <Icon icon="devicon:google" width="20" height="20" />
                         Sign in with Google
                     </Button>
+
+                    {/* Login Link Section */}
+                    <div className="mt-4 text-center">
+                        <p className="text-gray-400 text-sm">
+                            Already have an account?{" "}
+                            <Link
+                                href="/auth/login"
+                                className="text-[#a06cd5] font-bold hover:text-[#b07dec] hover:underline transition-all duration-200"
+                            >
+                                Please Login
+                            </Link>
+                        </p>
+                    </div>
 
                 </Form>
             </div>

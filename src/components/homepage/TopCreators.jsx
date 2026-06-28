@@ -2,44 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Box, Files, ArrowUpRight } from '@gravity-ui/icons';
+import { Star, Box, Files } from '@gravity-ui/icons';
 import Image from 'next/image';
-import Link from 'next/link';
 
-const TopCreators = () => {
-    // Fake Array of Objects for Top Creators
-    const creatorsData = [
-        {
-            _id: "1",
-            name: "PromptMaster",
-            role: "Senior AI Engineer",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-            prompts: 42,
-            copies: 1240,
-            badgeColor: "text-[#a06cd5]",
-            badgeBg: "bg-[#a06cd5]/20"
-        },
-        {
-            _id: "2",
-            name: "CreativeAI",
-            role: "Art Director",
-            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-            prompts: 28,
-            copies: 980,
-            badgeColor: "text-[#72b01d]", // Lime Green for variety
-            badgeBg: "bg-[#72b01d]/20"
-        },
-        {
-            _id: "3",
-            name: "GeminiWiz",
-            role: "Writer & Marketer",
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-            prompts: 35,
-            copies: 850,
-            badgeColor: "text-cyan-400", // Cyan for variety
-            badgeBg: "bg-cyan-400/20"
-        }
-    ];
+const TopCreators = ({ creators }) => {
 
     // Framer Motion Variants
     const containerVariants = {
@@ -58,6 +24,20 @@ const TopCreators = () => {
             transition: { duration: 0.5, ease: "easeOut" }
         }
     };
+
+    // Cycle through these styles to keep the UI colorful
+    const badgeStyles = [
+        { color: "text-[#a06cd5]", bg: "bg-[#a06cd5]/20" },
+        { color: "text-[#72b01d]", bg: "bg-[#72b01d]/20" },
+        { color: "text-cyan-400", bg: "bg-cyan-400/20" }
+    ];
+
+    // Image list provided by you
+    const creatorImages = [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuVBS3eEdZ_DIxxq5A9-ZOzGiE-1YMCEFCfowEqgn1dDlXhs_8RlOEpvo&s=10",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsoxIinmgCoGv4EayTvZdmYI3Uc_XtcVZqfdPQrax-Y3_BLWF5KdjJAsc&s=10",
+        "https://cdn.prod.website-files.com/6600e1eab90de089c2d9c9cd/669726e7b6388b54f9aa2769_66553f0390479b8e5a3fc524_image_CMEex1C1_1716770910814_raw.jpeg"
+    ];
 
     return (
         <section className="relative w-full py-24 bg-[#062726] overflow-hidden">
@@ -94,70 +74,80 @@ const TopCreators = () => {
                     viewport={{ once: true, margin: "-50px" }}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
                 >
-                    {creatorsData.map((creator) => (
-                        <motion.div
-                            key={creator._id}
-                            variants={cardVariants}
-                            className="group relative bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/50 hover:border-[#a06cd5]/70 rounded-3xl p-6 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(160,108,213,0.15)] flex flex-col"
-                        >
-                            {/* Top Star Badge (Absolute position inside card) */}
-                            <div className={`absolute top-5 right-5 w-8 h-8 rounded-full ${creator.badgeBg} flex items-center justify-center shadow-inner`}>
-                                <Star className={creator.badgeColor} size={14} />
-                            </div>
+                    {/* Checking if creators array exists and mapping through real data */}
+                    {creators && creators.map((creator, index) => {
+                        // Dynamically assign badge colors
+                        const badge = badgeStyles[index % badgeStyles.length];
 
-                            {/* Profile Info Section (Left Aligned) */}
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="relative w-16 h-16 rounded-full border-2 border-[#6247aa] group-hover:border-[#a06cd5] p-[2px] transition-colors duration-300">
-                                    <Image
-                                        src={creator.image}
-                                        alt={creator.name}
-                                        width={100}
-                                        height={100}
-                                        className="w-full h-full rounded-full object-cover"
-                                    />
-                                    {/* Active/Online indicator */}
-                                    <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#72b01d] border-2 border-[#102b3f] rounded-full"></span>
+                        // Dynamically assign image from your list based on index. Fallback to index 0 if out of bounds.
+                        const finalImageUrl = creatorImages[index % creatorImages.length];
+
+                        return (
+                            <motion.div
+                                key={creator.creatorId}
+                                variants={cardVariants}
+                                className="group relative bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/50 hover:border-[#a06cd5]/70 rounded-3xl p-6 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(160,108,213,0.15)] flex flex-col"
+                            >
+                                {/* Top Star Badge */}
+                                <div className={`absolute top-5 right-5 w-8 h-8 rounded-full ${badge.bg} flex items-center justify-center shadow-inner`}>
+                                    <Star className={badge.color} size={14} />
                                 </div>
 
-                                <div>
-                                    <h3 className="text-xl font-bold text-[#ffffff] group-hover:text-[#e2cfea] transition-colors duration-300">
-                                        {creator.name}
-                                    </h3>
-                                    <p className="text-[#a06cd5] text-sm font-medium">
-                                        {creator.role}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <hr className="border-[#4e148c]/30 mb-5" />
-
-                            {/* Stats Section (Stylized Data Display) */}
-                            <div className="flex items-center justify-between mt-auto">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-[#062726] flex items-center justify-center border border-[#6247aa]/20">
-                                        <Box className="text-[#e2cfea]/80" size={18} />
+                                {/* Profile Info Section */}
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="relative w-16 h-16 rounded-full border-2 border-[#6247aa] group-hover:border-[#a06cd5] p-[2px] transition-colors duration-300 bg-[#0b1a1f]">
+                                        <Image
+                                            src={finalImageUrl}
+                                            alt={creator.creatorName}
+                                            width={100}
+                                            height={100}
+                                            className="w-full h-full rounded-full object-cover"
+                                            unoptimized // Helps with external domains if not added in next.config.js
+                                        />
+                                        {/* Active/Online indicator */}
+                                        <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#72b01d] border-2 border-[#102b3f] rounded-full"></span>
                                     </div>
-                                    <div>
-                                        <p className="text-2xl font-bold text-[#ffffff]">{creator.prompts}</p>
-                                        <p className="text-[10px] uppercase tracking-wider text-[#e2cfea]/50 font-semibold">Prompts</p>
+
+                                    <div className="overflow-hidden">
+                                        <h3 className="text-xl font-bold text-[#ffffff] group-hover:text-[#e2cfea] transition-colors duration-300 truncate">
+                                            {creator.creatorName}
+                                        </h3>
+                                        <p className="text-[#a06cd5] text-sm font-medium truncate">
+                                            {creator.creatorEmail}
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="h-10 w-px bg-[#4e148c]/40"></div>
+                                <hr className="border-[#4e148c]/30 mb-5" />
 
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-[#062726] flex items-center justify-center border border-[#6247aa]/20">
-                                        <Files className="text-[#e2cfea]/80" size={18} />
+                                {/* Stats Section */}
+                                <div className="flex items-center justify-between mt-auto">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-[#062726] flex items-center justify-center border border-[#6247aa]/20">
+                                            <Box className="text-[#e2cfea]/80" size={18} />
+                                        </div>
+                                        <div>
+                                            <p className="text-2xl font-bold text-[#ffffff]">{creator.totalPromptCount}</p>
+                                            <p className="text-[10px] uppercase tracking-wider text-[#e2cfea]/50 font-semibold">Prompts</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-2xl font-bold text-[#ffffff]">{creator.copies}</p>
-                                        <p className="text-[10px] uppercase tracking-wider text-[#e2cfea]/50 font-semibold">Copies</p>
+
+                                    <div className="h-10 w-px bg-[#4e148c]/40"></div>
+
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-[#062726] flex items-center justify-center border border-[#6247aa]/20">
+                                            <Files className="text-[#e2cfea]/80" size={18} />
+                                        </div>
+                                        <div>
+                                            <p className="text-2xl font-bold text-[#ffffff]">{creator.totalCopyCount}</p>
+                                            <p className="text-[10px] uppercase tracking-wider text-[#e2cfea]/50 font-semibold">Copies</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </motion.div>
 
             </div>

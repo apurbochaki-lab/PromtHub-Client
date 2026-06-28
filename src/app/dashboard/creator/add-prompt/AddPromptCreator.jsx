@@ -17,7 +17,7 @@ import { serverMutation } from '@/lib/core/server';
 import { useRouter } from 'next/navigation';
 
 const AddPromptCreator = ({ user }) => {
-    console.log(user)
+    // console.log(user)
     const [category, setCategory] = useState('Coding');
     const [aiTool, setAiTool] = useState('ChatGPT');
     const [difficulty, setDifficulty] = useState('Beginner');
@@ -65,9 +65,9 @@ const AddPromptCreator = ({ user }) => {
             reviewCount: 0
         };
 
-        console.log(newData)
+        // console.log(newData)
 
-        const res = await serverMutation('/api/prompts', newData);
+        const res = await serverMutation('/api/add-prompt-creator', newData);
         console.log("response:", res)
 
         if (res.insertedId) {

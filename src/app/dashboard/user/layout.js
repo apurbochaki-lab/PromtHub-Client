@@ -9,7 +9,7 @@ const AdminLayout = async ({ children }) => {
     }
 
     if (user.role !== "user") {
-        redirect("/unauthorized");
+        redirect("/error/unauthorized");
     }
 
     return (

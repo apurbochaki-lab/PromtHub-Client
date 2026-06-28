@@ -5,33 +5,13 @@ import { motion } from 'framer-motion';
 import { Star, QuoteOpen } from '@gravity-ui/icons';
 import Image from 'next/image';
 
-const CustomerReviews = () => {
-    // Fake Review Data structured from Screenshot_839.png
-    const reviewsData = [
-        {
-            _id: "1",
-            name: "Sarah Connor",
-            role: "Content Strategist",
-            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb",
-            rating: 5,
-            comment: "PromptHub completely changed how I interact with Claude. The prompts are highly refined and save me hours every day. Absolute lifesaver for content creators!"
-        },
-        {
-            _id: "2",
-            name: "Alex Rivera",
-            role: "Software Engineer",
-            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d",
-            rating: 5,
-            comment: "I found an incredible prompt that debugs React code and writes unit tests in seconds. Simply amazing! The quality control on this platform is top-notch."
-        },
-        {
-            _id: "3",
-            name: "Elena Rostova",
-            role: "Digital Artist",
-            image: "https://images.unsplash.com/photo-1517841905240-472988babdf9",
-            rating: 5,
-            comment: "The Midjourney prompts here are pure gold. The parameters and keywords are so detailed. Highly recommend for any serious digital artist or designer."
-        }
+const CustomerReviews = ({ reviews }) => {
+
+    // Image links provided by you (cyclically applied to reviews)
+    const imageLinks = [
+        "https://plus.unsplash.com/premium_photo-1689570350306-3aa2bc42189e",
+        "https://plus.unsplash.com/premium_photo-1689531953275-a5cfcc458931",
+        "https://plus.unsplash.com/premium_photo-1726815616472-8ddb1c5ea697"
     ];
 
     // Framer Motion Animation Variants
@@ -77,69 +57,83 @@ const CustomerReviews = () => {
                     </p>
                 </div>
 
-                {/* Reviews Grid */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
-                >
-                    {reviewsData.map((review) => (
-                        <motion.div
-                            key={review._id}
-                            variants={cardVariants}
-                            whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                            className="group relative bg-gradient-to-b from-[#102b3f]/40 to-[#000000]/90 backdrop-blur-xl border border-[#6247aa]/40 hover:border-[#a06cd5]/60 rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_15px_40px_rgba(160,108,213,0.1)]"
-                        >
-                            {/* Decorative Big Quote Icon in Background */}
-                            <div className="absolute top-6 right-8 text-[#6247aa]/30 group-hover:text-[#a06cd5]/50 transition-colors duration-300 pointer-events-none">
-                                <QuoteOpen size={48} />
-                            </div>
+                {/* Reviews Grid or Empty State */}
+                {(!reviews || reviews.length === 0) ? (
+                    <div className="flex flex-col items-center justify-center py-10">
+                        <p className="text-2xl font-bold text-[#e2cfea]/50">No reviews found</p>
+                    </div>
+                ) : (
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+                    >
+                        {reviews.map((review, index) => {
+                            // Extract ID dynamically for MongoDB's $oid or normal ID
+                            const id = review._id?.$oid || review._id || index;
 
-                            <div>
-                                {/* Rating Stars (Dynamic Loop based on rating count) */}
-                                <div className="flex items-center gap-1 mb-6">
-                                    {[...Array(review.rating)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            size={18}
-                                            className="text-[#72b01d] fill-[#72b01d]" // Eye-catchy Lime Green stars from palette
-                                        />
-                                    ))}
-                                </div>
+                            // Pick image cyclically from the array
+                            const reviewImage = imageLinks[index % imageLinks.length];
 
-                                {/* Review Comment */}
-                                <p className="text-[#e2cfea]/90 text-base italic leading-relaxed mb-8 relative z-10 font-medium">
-                                    &quot;{review.comment}&quot;
-                                </p>
-                            </div>
+                            // Ensure rating is between 0 and 5
+                            const rating = Math.min(Math.max(review.rating || 0, 0), 5);
 
-                            {/* User Profile Footer */}
-                            <div className="flex items-center gap-4 border-t border-[#6247aa]/20 pt-6 mt-auto">
-                                <div className="relative w-12 h-12 rounded-full border border-[#a06cd5]/40 overflow-hidden">
-                                    <Image
-                                        src={review.image}
-                                        alt={review.name}
-                                        width={80}
-                                        height={80}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                </div>
-                                <div>
-                                    <h4 className="text-base font-bold text-[#ffffff] tracking-wide">
-                                        {review.name}
-                                    </h4>
-                                    <p className="text-[#a06cd5] text-xs font-semibold tracking-wider uppercase mt-0.5">
-                                        {review.role}
-                                    </p>
-                                </div>
-                            </div>
+                            return (
+                                <motion.div
+                                    key={id}
+                                    variants={cardVariants}
+                                    whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                    className="group relative bg-gradient-to-b from-[#102b3f]/40 to-[#000000]/90 backdrop-blur-xl border border-[#6247aa]/40 hover:border-[#a06cd5]/60 rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_15px_40px_rgba(160,108,213,0.1)]"
+                                >
+                                    {/* Decorative Big Quote Icon in Background */}
+                                    <div className="absolute top-6 right-8 text-[#6247aa]/30 group-hover:text-[#a06cd5]/50 transition-colors duration-300 pointer-events-none">
+                                        <QuoteOpen size={48} />
+                                    </div>
 
-                        </motion.div>
-                    ))}
-                </motion.div>
+                                    <div>
+                                        {/* Dynamic 5-Star Rating */}
+                                        <div className="flex items-center gap-1 mb-6">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    size={18}
+                                                    className={i < rating ? "text-[#72b01d] fill-[#72b01d]" : "text-[#72b01d]/20 fill-transparent"}
+                                                />
+                                            ))}
+                                        </div>
 
+                                        {/* Review Comment */}
+                                        <p className="text-[#e2cfea]/90 text-base italic leading-relaxed mb-8 relative z-10 font-medium">
+                                            &quot;{review.comment}&quot;
+                                        </p>
+                                    </div>
+
+                                    {/* User Profile Footer */}
+                                    <div className="flex items-center gap-4 border-t border-[#6247aa]/20 pt-6 mt-auto">
+                                        <div className="relative w-12 h-12 rounded-full border border-[#a06cd5]/40 overflow-hidden">
+                                            <Image
+                                                src={reviewImage}
+                                                alt={review.userName || "User"}
+                                                width={80}
+                                                height={80}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                unoptimized // Ensure Unsplash links load correctly without Next.js domain config errors
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-base font-bold text-[#ffffff] tracking-wide">
+                                                {review.userName || "Anonymous"}
+                                            </h4>
+                                            {/* Role section removed as requested */}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
+                )}
             </div>
         </section>
     );

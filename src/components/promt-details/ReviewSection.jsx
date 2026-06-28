@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star } from "@gravity-ui/icons";
+import { CircleCheckFill, Star } from "@gravity-ui/icons";
 import ReviewCard from "./ReviewCard";
 import { Button } from "@heroui/react";
 import { serverMutation } from "@/lib/core/server";
@@ -80,8 +80,25 @@ export default function ReviewSection({ isLocked, prompt, user, recentReviews: r
                             <div>
                                 {
                                     submitted ?
-                                        <div className="py-10 text-green-500 font-bold">
-                                            You already submitted your review!
+                                        <div className="py-10">
+                                            <div className="inline-flex max-w-xl items-start gap-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4">
+
+                                                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500/20">
+                                                    <CircleCheckFill className="text-emerald-400" size={20} />
+                                                </div>
+
+                                                <div>
+                                                    <h3 className="text-lg font-semibold text-emerald-300">
+                                                        Review Already Submitted
+                                                    </h3>
+
+                                                    <p className="mt-1 text-sm leading-6 text-emerald-100/90">
+                                                        Thanks for sharing your feedback! You've already submitted a review
+                                                        for this prompt, so additional reviews aren't allowed.
+                                                    </p>
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                         : (<form

@@ -3,6 +3,7 @@ import GrowthChart from "@/components/dashboard/creator-components/GrowthChart";
 import { getPromptsStats } from "@/lib/api/creator/creator-home";
 import { getMyPrompts } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
+import BarTopChart from "@/components/dashboard/creator-components/BarTopChart";
 
 const CreatorHomepage = async () => {
 
@@ -35,6 +36,13 @@ const CreatorHomepage = async () => {
                 totalBookmarks={totalBookmarks}
             />
 
+            <div className="mt-8">
+                <BarTopChart
+                    totalCopies={totalCopies}
+                    totalBookmarks={totalBookmarks}
+                />
+            </div>
+
             {/* Growth Metrics Chart Section */}
             <div className="mt-8">
                 <GrowthChart
@@ -43,6 +51,8 @@ const CreatorHomepage = async () => {
                     totalBookmarks={totalBookmarks}
                 />
             </div>
+
+
         </div>
     );
 };

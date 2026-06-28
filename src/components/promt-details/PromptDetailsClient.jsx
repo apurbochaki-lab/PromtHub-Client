@@ -368,7 +368,7 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
                             </div>
                             <div>
                                 <h4 className="text-sm font-bold text-[#ffffff]">{prompt?.creatorName}</h4>
-                                <p className="text-xs text-[#e2cfea]/60 mt-0.5">Email: {prompt?.creatorEmail}</p>
+                                <p className="text-xs text-[#e2cfea]/60 mt-0.5"> {prompt?.creatorEmail}</p>
                             </div>
                         </div>
                     </div>

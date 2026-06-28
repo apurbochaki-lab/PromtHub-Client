@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 
 const PromptsTableClient = ({ prompts }) => {
     const [selectedAnalytics, setSelectedAnalytics] = useState(null);
+    console.log("selectedAnalytics", selectedAnalytics)
 
     // Conditional UI for Status
     const getStatusUI = (status) => {
@@ -34,7 +35,7 @@ const PromptsTableClient = ({ prompts }) => {
     const handlePromptUpdate = () => {
         toast.success("Edit clicked")
 
-        
+
     }
 
     return (
@@ -120,7 +121,7 @@ const PromptsTableClient = ({ prompts }) => {
 
                                                 {/* Edit Data (Update CRUD) */}
                                                 <Button onClick={handlePromptUpdate}
-                                                variant="outline" className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
+                                                    variant="outline" className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
                                                     <Pencil width={18} />
                                                 </Button>
 
@@ -211,22 +212,26 @@ const PromptsTableClient = ({ prompts }) => {
 
                             <div className="flex justify-between items-center bg-[#0b1410] border-b border-[#72b01d]/10 p-3">
                                 <span className="text-[#8fbc8f] text-sm">Bookmarks Saved</span>
-                                <span className="text-[#ffffff] font-bold">120 <span className="text-xs text-[#8fbc8f] ml-1">(Static)</span></span>
+                                <span className="text-[#ffffff] font-bold">{selectedAnalytics?.bookmarkCount} </span>
                             </div>
 
                             <div className="flex justify-between items-center bg-[#0b1410] border-b border-[#72b01d]/10 p-3">
                                 <span className="text-[#8fbc8f] text-sm">Average Rating</span>
-                                <span className="text-[#95d542] font-bold flex items-center gap-1">★ {selectedAnalytics.rating.toFixed(1)}</span>
+                                <span className="text-[#95d542] font-bold flex items-center gap-1">★ {selectedAnalytics?.rating}</span>
                             </div>
 
                             <div className="flex justify-between items-center bg-[#0b1410] border-b border-[#72b01d]/10 p-3">
                                 <span className="text-[#8fbc8f] text-sm">Review Feedbacks</span>
-                                <span className="text-[#ffffff] font-bold">45 reviews <span className="text-xs text-[#8fbc8f] ml-1">(Static)</span></span>
+                                <span className="text-[#ffffff] font-bold">{selectedAnalytics?.reviewCount} reviews </span>
                             </div>
 
                             <div className="flex justify-between items-center bg-[#0b1410] p-3 text-xs text-[#8fbc8f] mt-4">
                                 <span>Created Date</span>
-                                <span>🗓 24 Jun 2026 (Static)</span>
+                                <span className="font-semibold">🗓 {new Date(selectedAnalytics?.createdAt).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}</span>
                             </div>
                         </div>
 

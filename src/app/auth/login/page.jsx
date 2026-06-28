@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function LoginPage() {
 
@@ -44,7 +45,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center bg-[#020617] overflow-hidden py-12 px-4 z-0">
+        <div className="relative min-h-screen flex items-center justify-center bg-[#020617] overflow-hidden pt-12 pb-22 px-4 z-0">
 
             {/* --- Background Blurry Glow Effects (Emerald & Sky Blue) --- */}
             <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#10b981] rounded-full mix-blend-screen filter blur-[140px] opacity-20 z-[-1] animate-pulse"></div>
@@ -105,22 +106,8 @@ export default function LoginPage() {
                         <FieldError className="text-red-400 text-xs" />
                     </TextField>
 
-                    {/* Forgot Password Link (Optional but good for Login pages) */}
-                    {/* <div className="flex justify-end w-full -mt-2">
-                        <a href="#" className="text-xs text-[#10b981] hover:text-[#34d399] transition-colors">
-                            Forgot password?
-                        </a>
-                    </div> */}
-
                     {/* Submit and Reset Buttons */}
                     <div className="flex gap-3 mt-2">
-                        <Button
-                            type="submit"
-                            className="flex-1 bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all duration-300 transform hover:-translate-y-0.5"
-                        >
-                            <Check size={18} />
-                            Login
-                        </Button>
 
                         <Button
                             type="reset"
@@ -129,6 +116,14 @@ export default function LoginPage() {
                         >
                             <Xmark size={18} />
                             Reset
+                        </Button>
+
+                        <Button
+                            type="submit"
+                            className="flex-1 bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.3)] transition-all duration-300 transform hover:-translate-y-0.5"
+                        >
+                            <Check size={18} />
+                            Login
                         </Button>
                     </div>
 
@@ -149,6 +144,18 @@ export default function LoginPage() {
                         Sign in with Google
                     </Button>
 
+                    {/* Register Redirect */}
+                    <div className="mt-2 w-full text-center">
+                        <p className="text-sm text-slate-400">
+                            Don&apos;t have an account?{" "}
+                            <Link
+                                href="/auth/register"
+                                className="font-bold bg-gradient-to-r from-[#10b981] to-[#38bdf8] bg-clip-text text-transparent hover:from-[#34d399] hover:to-[#7dd3fc] transition-all duration-300"
+                            >
+                                &nbsp;Create Account
+                            </Link>
+                        </p>
+                    </div>
                 </Form>
             </div>
         </div>
