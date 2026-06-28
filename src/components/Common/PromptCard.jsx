@@ -1,4 +1,4 @@
-import { Card } from "@heroui/react";
+import { Button, Card } from "@heroui/react";
 import Link from "next/link";
 import { Lock, Files, Star, Eye } from "@gravity-ui/icons";
 
@@ -80,12 +80,22 @@ const PromptCard = ({ prompt }) => {
                 {/* 3. Card Footer / Call to Action (Fixed Link Issue) */}
                 <Card.Footer className="p-0 mt-auto pt-5">
                     {/* Link নিজেই এখন বাটনের ডিজাইন বহন করবে, তাই রিলোড হবে না */}
-                    <Link
+                    {/* <Link
                         href={`/prompts/${promptId}`}
                         className="w-full bg-[#102b3f] hover:bg-[#6247aa] text-[#ffffff] font-semibold text-sm py-3.5 rounded-xl border border-[#6247aa]/50 hover:border-[#a06cd5] transition-all duration-300 flex justify-center items-center gap-2 group/btn"
                     >
                         <Eye size={16} className="group-hover/btn:scale-110 transition-transform" />
                         View Details
+                    </Link> */}
+
+                    <Link
+                        href={`/prompts/${promptId}`}
+                        className="w-full"
+                    >
+                        <Button className="w-full bg-[#102b3f] hover:bg-[#6247aa] text-[#ffffff] font-semibold text-sm py-5 rounded-xl border border-[#6247aa]/50 hover:border-[#a06cd5] transition-all duration-300 flex justify-center items-center gap-2 group/btn">
+                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform" />
+                            View Details
+                        </Button>
                     </Link>
                 </Card.Footer>
             </div>
