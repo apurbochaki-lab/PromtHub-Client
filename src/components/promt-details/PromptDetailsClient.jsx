@@ -30,6 +30,12 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
     const [isBookmarked, setIsBookmarked] = useState(prompt?.isBookmarked || false);
     const [isCopied, setIsCopied] = useState(false);
 
+    // isLocked Condition:
+    const isLocked = prompt?.isPrivate &&
+        currentSessionUser?.role === "user" &&
+        currentSessionUser?.plan === "free";
+
+    // console.log("Locked", isLocked)
 
     const handleCopy = async () => {
         navigator.clipboard.writeText(prompt.content);
@@ -208,36 +214,101 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
                         </p>
                     </div>
 
-                    {/* Prompt Template Section */}
-                    <div className="bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/40 rounded-2xl p-6 md:p-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold text-[#ffffff]">Prompt Template</h2>
-                            <Button
-                                onClick={handleCopy}
-                                className="bg-[#6247aa]/20 hover:bg-[#6247aa]/40 text-[#e2cfea] border border-[#a06cd5]/30 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 transition-all"
-                            >
-                                {isCopied ? <Check size={16} className="text-[#72b01d]" /> : <Copy size={16} />}
-                                {isCopied ? "Copied!" : "Copy"}
-                            </Button>
-                        </div>
 
-                        <div className="bg-[#000000]/40 border border-[#062726] rounded-xl p-6 relative group overflow-hidden">
-                            <pre className="text-[#a06cd5] font-mono text-sm md:text-base whitespace-pre-wrap leading-loose">
-                                {prompt.content}
-                            </pre>
-                        </div>
+                    {
+                        isLocked ? (<div className="relative overflow-hidden rounded-3xl border border-emerald-500/15 bg-gradient-to-br from-[#030807] via-[#071412] to-[#020604] p-8 md:p-12">
 
-                        {/* Usage Instructions */}
-                        <div className="mt-8">
-                            <h3 className="text-lg font-bold text-[#ffffff] mb-3">Usage Instructions</h3>
-                            <p className="text-[#e2cfea]/70 text-sm leading-relaxed">
-                                For best results, configure your parameters on {prompt.aiTool} with low temperature to avoid hallucinations. Replace any specific context in the template with your target topic details.
-                            </p>
-                        </div>
-                    </div>
+
+                            <div className="absolute -top-20 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
+
+                            <div className="relative z-10 flex flex-col items-center text-center">
+
+
+                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-500/10">
+
+                                    <Lock className="h-8 w-8 text-emerald-400" />
+
+                                </div>
+
+
+                                <h2 className="text-3xl font-extrabold tracking-tight text-white">
+
+                                    Premium Prompt Locked
+
+                                </h2>
+
+
+                                <p className="mt-4 max-w-xl text-base leading-7 text-zinc-400">
+
+                                    Upgrade to the <span className="font-semibold text-emerald-400">Premium Plan</span> to
+                                    unlock this prompt, access detailed reviews, copy the content,
+                                    and enjoy every premium feature without limits.
+
+                                </p>
+
+
+                                <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+
+                                    <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300">
+                                        Unlimited Premium Prompts
+                                    </span>
+
+                                    <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300">
+                                        Full Prompt Copy
+                                    </span>
+
+                                    <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2 text-sm text-violet-300">
+                                        Reviews & Ratings
+                                    </span>
+
+                                </div>
+
+
+                                <Link href="/pricing" className="mt-10 w-full max-w-sm">
+
+                                    <Button
+                                        size="lg"
+                                        radius="full"
+                                        className="h-14 w-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-lg font-bold text-black shadow-[0_0_30px_rgba(45,212,191,.25)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_45px_rgba(45,212,191,.45)]"
+                                    >
+                                        Subscribe to Premium ($5)
+                                    </Button>
+
+                                </Link>
+
+                            </div>
+
+                        </div>) : (<div className="bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/40 rounded-2xl p-6 md:p-8">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-xl font-bold text-[#ffffff]">Prompt Template</h2>
+                                <Button
+                                    onClick={handleCopy}
+                                    className="bg-[#6247aa]/20 hover:bg-[#6247aa]/40 text-[#e2cfea] border border-[#a06cd5]/30 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 transition-all"
+                                >
+                                    {isCopied ? <Check size={16} className="text-[#72b01d]" /> : <Copy size={16} />}
+                                    {isCopied ? "Copied!" : "Copy"}
+                                </Button>
+                            </div>
+
+                            <div className="bg-[#000000]/40 border border-[#062726] rounded-xl p-6 relative group overflow-hidden">
+                                <pre className="text-[#a06cd5] font-mono text-sm md:text-base whitespace-pre-wrap leading-loose">
+                                    {prompt.content}
+                                </pre>
+                            </div>
+
+
+                            <div className="mt-8">
+                                <h3 className="text-lg font-bold text-[#ffffff] mb-3">Usage Instructions</h3>
+                                <p className="text-[#e2cfea]/70 text-sm leading-relaxed">
+                                    For best results, configure your parameters on {prompt.aiTool} with low temperature to avoid hallucinations. Replace any specific context in the template with your target topic details.
+                                </p>
+                            </div>
+                        </div>)
+                    }
+
                 </div>
 
-                {/* Right Section: Sidebar */}
+
                 <div className="space-y-6">
                     {/* Prompt Details Stats Card */}
                     <div className="bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/40 rounded-2xl p-6">
@@ -289,7 +360,6 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
                         </div>
                     </div>
 
-                    {/* Creator Information Card */}
                     <div className="bg-[#102b3f]/60 backdrop-blur-xl border border-[#6247aa]/40 rounded-2xl p-6">
                         <h3 className="text-sm font-bold text-[#ffffff] mb-4">Creator Information</h3>
                         <div className="flex items-center gap-4">
@@ -309,11 +379,9 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
             {/* Review Section */}
             <ReviewSection
                 prompt={prompt}
-                isReviewed={prompt?.isReviewed}
-                aiTool={prompt?.aiTool}
                 user={currentSessionUser}
-                promptId={promptId}
-                recentReviews={recentReviews} />
+                recentReviews={recentReviews}
+                isLocked={isLocked} />
         </div>
     );
 };

@@ -7,9 +7,10 @@ import { Button } from "@heroui/react";
 import { serverMutation } from "@/lib/core/server";
 import toast from "react-hot-toast";
 import { refreshPath } from "@/lib/core/refreshPage";
+import { LockIcon } from "lucide-react";
 
-export default function ReviewSection({ prompt, user, recentReviews: reviews }) {
-    console.log("REcent review: ", prompt)
+export default function ReviewSection({ isLocked, prompt, user, recentReviews: reviews }) {
+    // console.log("REcent review: ", prompt)
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [submitted, setSubmitted] = useState(prompt?.isReviewed)
@@ -70,77 +71,84 @@ export default function ReviewSection({ prompt, user, recentReviews: reviews }) 
                             Submit a Review
                         </h3>
 
-                        {
-                            submitted ?
-                                <div className="py-10 text-green-500 font-bold">
-                                    You already submitted your review!
-                                </div>
-
-                                : (<form
-                                    onSubmit={handleSubmit}
-                                    className="mt-6 space-y-6"
-                                >
-                                    {/* Rating */}
-                                    <div>
-                                        <label className="mb-3 block text-sm font-medium text-gray-300">
-                                            Rating
-                                        </label>
-
-                                        <div className="flex items-center gap-2">
-                                            {[1, 2, 3, 4, 5].map((star) => (
-                                                <button
-                                                    type="button"
-                                                    key={star}
-                                                    onClick={() =>
-                                                        handleStarClick(star)
-                                                    }
-                                                    className="transition-transform hover:scale-110"
-                                                >
-                                                    <Star
-                                                        size={28}
-                                                        className={
-                                                            star <= rating
-                                                                ? "fill-yellow-400 text-yellow-400"
-                                                                : "text-gray-500"
-                                                        }
-                                                    />
-                                                </button>
-                                            ))}
+                        {isLocked ? (
+                            <div className="pt-8 ">
+                                <span className="flex justify-center text-green-400 pb-5"><LockIcon size={30} /></span>
+                                <h2 className="text-teal-200 font-bold">Reviews are disabled for premium locked prompts. Subscribe to premium to contribute feedback.</h2>
+                            </div>
+                        ) : (
+                            <div>
+                                {
+                                    submitted ?
+                                        <div className="py-10 text-green-500 font-bold">
+                                            You already submitted your review!
                                         </div>
 
-                                        {rating > 0 && (
-                                            <p className="mt-2 text-sm text-gray-400">
-                                                Selected Rating: {rating}/5
-                                            </p>
-                                        )}
-                                    </div>
+                                        : (<form
+                                            onSubmit={handleSubmit}
+                                            className="mt-6 space-y-6"
+                                        >
+                                            <div>
+                                                <label className="mb-3 block text-sm font-medium text-gray-300">
+                                                    Rating
+                                                </label>
 
-                                    {/* Comment */}
-                                    <div>
-                                        <label className="mb-3 block text-sm font-medium text-gray-300">
-                                            Comment
-                                        </label>
+                                                <div className="flex items-center gap-2">
+                                                    {[1, 2, 3, 4, 5].map((star) => (
+                                                        <button
+                                                            type="button"
+                                                            key={star}
+                                                            onClick={() =>
+                                                                handleStarClick(star)
+                                                            }
+                                                            className="transition-transform hover:scale-110"
+                                                        >
+                                                            <Star
+                                                                size={28}
+                                                                className={
+                                                                    star <= rating
+                                                                        ? "fill-yellow-400 text-yellow-400"
+                                                                        : "text-gray-500"
+                                                                }
+                                                            />
+                                                        </button>
+                                                    ))}
+                                                </div>
 
-                                        <textarea
-                                            value={comment}
-                                            onChange={(e) =>
-                                                setComment(e.target.value)
-                                            }
-                                            rows={5}
-                                            placeholder="Write your feedback..."
-                                            className="w-full rounded-2xl border border-white/10 bg-black/20 p-4 text-white outline-none transition focus:border-primary"
-                                        />
-                                    </div>
+                                                {rating > 0 && (
+                                                    <p className="mt-2 text-sm text-gray-400">
+                                                        Selected Rating: {rating}/5
+                                                    </p>
+                                                )}
+                                            </div>
 
-                                    {/* Submit */}
-                                    <Button
-                                        type="submit"
-                                        className="w-full rounded-2xl bg-primary px-5 py-3 font-semibold text-white transition hover:opacity-90"
-                                    >
-                                        Submit Review
-                                    </Button>
-                                </form>)
-                        }
+                                            <div>
+                                                <label className="mb-3 block text-sm font-medium text-gray-300">
+                                                    Comment
+                                                </label>
+
+                                                <textarea
+                                                    value={comment}
+                                                    onChange={(e) =>
+                                                        setComment(e.target.value)
+                                                    }
+                                                    rows={5}
+                                                    placeholder="Write your feedback..."
+                                                    className="w-full rounded-2xl border border-white/10 bg-black/20 p-4 text-white outline-none transition focus:border-primary"
+                                                />
+                                            </div>
+
+                                            <Button
+                                                type="submit"
+                                                className="w-full rounded-2xl bg-primary px-5 py-3 font-semibold text-white transition hover:opacity-90"
+                                            >
+                                                Submit Review
+                                            </Button>
+                                        </form>)
+                                }
+                            </div>)}
+
+
 
 
                     </div>

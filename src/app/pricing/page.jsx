@@ -1,12 +1,25 @@
 import { Card, Button } from "@heroui/react";
 import { Check, CrownDiamond, ShieldCheck } from "@gravity-ui/icons";
+import { getUserSession } from "@/lib/core/session";
+import Link from "next/link";
 
-const PricingPage = () => {
+const PricingPage = async () => {
+
+    const user = await getUserSession();
+
     return (
+
         <div className="min-h-[85vh] w-full bg-[#000000] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#044a2b]/20 via-[#020a07] to-[#000000] flex flex-col items-center justify-center p-6 md:p-10 relative overflow-hidden mb-30">
 
             {/* Soft Background Glow for eye comfort */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#72b01d] blur-[300px] opacity-[0.08] pointer-events-none" />
+
+
+            {!user && (
+                <Button color="primary">
+                    Login First
+                </Button>
+            )}
 
             {/* Page Headers */}
             <div className="text-center z-10 mb-12 max-w-2xl">
@@ -69,12 +82,33 @@ const PricingPage = () => {
                     </Card.Content>
 
                     <Card.Footer className="p-8 pt-0 flex flex-col gap-4">
-                        <form action="/api/payment-getway" method="POST">
+                        {/* <form action="/api/payment-getway" method="POST">
                             <Button type="submit"
                                 className="w-full h-14 bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold text-base rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.2)] hover:shadow-[0_0_30px_rgba(149,213,66,0.4)] hover:-translate-y-0.5">
                                 Get Lifetime Access
                             </Button>
-                        </form>
+                        </form> */}
+
+                        {user ? (
+                            <form action="/api/payment-getway" method="POST">
+                                <Button type="submit"
+                                    className="w-full h-14 bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold text-base rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.2)] hover:shadow-[0_0_30px_rgba(149,213,66,0.4)] hover:-translate-y-0.5">
+                                    Get Lifetime Access
+                                </Button>
+                            </form>
+                        ) : (
+
+                            <Link href="/auth/login">
+                                <Button
+                                    className="w-full h-14 bg-[#72b01d] hover:bg-[#95d542] text-[#000000] font-bold text-base rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(114,176,29,0.2)] hover:shadow-[0_0_30px_rgba(149,213,66,0.4)] hover:-translate-y-0.5"
+                                >
+                                    Get Lifetime Access
+                                </Button>
+                            </Link>
+
+                        )}
+
+
                         <div className="flex justify-center items-center gap-1.5 text-[#8fbc8f] text-xs">
                             <ShieldCheck size={14} />
                             <span>Secure, one-click checkout via Stripe</span>
