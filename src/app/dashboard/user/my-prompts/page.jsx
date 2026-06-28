@@ -1,3 +1,4 @@
+import PromptsTableUser from "@/components/dashboard/creator-components/PromptTableUser";
 import PromptsTableClient from "@/components/dashboard/user-components/PromptsTableClient";
 import { getMyPrompts } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
@@ -58,7 +59,7 @@ const MyPromptsPage = async () => {
                 ) : (
                     <div>
                         {/* Client Component */}
-                        <PromptsTableClient prompts={myPrompts || []} />
+                        <PromptsTableUser prompts={myPrompts || []} />
                     </div>
                 )}
 

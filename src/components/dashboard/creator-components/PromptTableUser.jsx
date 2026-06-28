@@ -14,11 +14,12 @@ import {
 } from "@gravity-ui/icons";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { ModalFormCreator } from "@/components/Common/ModalFormCreator";
-import { deleteCreatorPrompt } from "@/lib/actions/data-update-creator";
+import { ModalFormUser } from "@/components/Common/ModalFormUser";
+import { deleteUserPrompt } from "@/lib/actions/data-update-user";
 import { refreshPath } from "@/lib/core/refreshPage";
 
-const PromptsTableClient = ({ prompts }) => {
+const PromptsTableUser = ({ prompts }) => {
+
     const [selectedAnalytics, setSelectedAnalytics] = useState(null);
     console.log("selectedAnalytics", selectedAnalytics)
 
@@ -35,17 +36,19 @@ const PromptsTableClient = ({ prompts }) => {
         }
     };
 
-    const handleCreatorDataDelete = async (promptId) => {
-        const res = await deleteCreatorPrompt(promptId)
+
+    const handleUserPromptDelete = async (promptId) => {
+        const res = await deleteUserPrompt(promptId)
 
         if (res?.result?.deletedCount > 0) {
-            refreshPath("/dashboard/creator/my-prompts")
-            toast.success("Prompt Deleted")
+            refreshPath("/dashboard/user/my-prompts")
+            toast.success("Prompt deleted")
         } else {
             toast.error("Something went wrong!")
         }
 
     }
+
 
     return (
         // Added 'dark' class and forced global text-white to kill light mode defaults
@@ -134,16 +137,16 @@ const PromptsTableClient = ({ prompts }) => {
                                                     <Pencil width={18} />
                                                 </Button> */}
 
-                                                <ModalFormCreator prompt={prompt} />
+                                                <ModalFormUser prompt={prompt} />
 
 
-                                                {/* <Button variant="outline"
+                                                <Button variant="outline"
                                                     onClick={() => setSelectedAnalytics(prompt)}
                                                     className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30"
                                                     title="Analytics"
                                                 >
                                                     <ChartColumn width={18} />
-                                                </Button> */}
+                                                </Button>
 
                                                 {/* HeroUI Delete Confirmation Modal */}
                                                 <AlertDialog>
@@ -171,7 +174,7 @@ const PromptsTableClient = ({ prompts }) => {
                                                                     <Button slot="close" className="bg-transparent text-[#8fbc8f] hover:text-[#ffffff] border border-[#72b01d]/20 px-4 py-2 rounded-md">
                                                                         Cancel
                                                                     </Button>
-                                                                    <Button onClick={() => handleCreatorDataDelete(prompt?._id)}
+                                                                    <Button onClick={() => handleUserPromptDelete(prompt?._id)}
                                                                         slot="close" className="bg-[#ef4444]/10 text-[#ef4444] hover:bg-[#ef4444] hover:text-white border border-[#ef4444]/30 px-4 py-2 rounded-md transition-colors">
                                                                         Confirm Delete
                                                                     </Button>
@@ -254,4 +257,4 @@ const PromptsTableClient = ({ prompts }) => {
     );
 };
 
-export default PromptsTableClient;
+export default PromptsTableUser;
