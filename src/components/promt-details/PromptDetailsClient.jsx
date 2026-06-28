@@ -308,7 +308,9 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
 
             {/* Review Section */}
             <ReviewSection
+                prompt={prompt}
                 isReviewed={prompt?.isReviewed}
+                aiTool={prompt?.aiTool}
                 user={currentSessionUser}
                 promptId={promptId}
                 recentReviews={recentReviews} />

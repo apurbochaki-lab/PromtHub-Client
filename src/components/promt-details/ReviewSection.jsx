@@ -8,39 +8,12 @@ import { serverMutation } from "@/lib/core/server";
 import toast from "react-hot-toast";
 import { refreshPath } from "@/lib/core/refreshPage";
 
-export default function ReviewSection({ isReviewed, user, promptId, recentReviews: reviews }) {
-    console.log("REcent review: ", reviews)
+export default function ReviewSection({ prompt, user, recentReviews: reviews }) {
+    console.log("REcent review: ", prompt)
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
-    const [submitted, setSubmitted] = useState(isReviewed)
+    const [submitted, setSubmitted] = useState(prompt?.isReviewed)
 
-
-    // const reviews = [
-    //     {
-    //         id: 1,
-    //         name: "Apurbo Chaki",
-    //         rating: 5,
-    //         date: "June 27, 2026",
-    //         comment:
-    //             "Excellent prompt. Helped me generate clean and professional code reviews."
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Creator",
-    //         rating: 4,
-    //         date: "June 26, 2026",
-    //         comment:
-    //             "Very useful for improving code quality and spotting security issues."
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "User",
-    //         rating: 3,
-    //         date: "June 25, 2026",
-    //         comment:
-    //             "Good prompt overall, but I had to tweak it a little for my use case."
-    //     }
-    // ];
 
     const handleStarClick = (value) => {
         setRating(value);
@@ -56,17 +29,18 @@ export default function ReviewSection({ isReviewed, user, promptId, recentReview
 
         const reviewData = {
             ...data,
-            promptId,
+            title: prompt?.title,
+            aiTool: prompt?.aiTool,
+            promptId: prompt?._id,
             userName: user?.name,
             uerEmail: user?.email,
             userId: user?.id
-
         }
 
         // API call later
         const res = await serverMutation("/api/prompt-review", reviewData)
         if (!res.isExist) {
-            refreshPath(`prompts/${promptId}`)
+            refreshPath(`prompts/${prompt?._id}`)
             setSubmitted(true)
             toast.success("Review Submitted")
         }
@@ -189,6 +163,7 @@ export default function ReviewSection({ isReviewed, user, promptId, recentReview
                             <ReviewCard
                                 key={review._id}
                                 review={review}
+
                             />
                         ))}
                     </div>
