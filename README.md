@@ -1,53 +1,65 @@
-My selected theme colors :
+<div align="center">
+  <img src="[https://i.ibb.co.com/7hV2Fch/logo-modified.png](https://i.ibb.co.com/7hV2Fch/logo-modified.png)" alt="AI Logo" width="120" />
+  <h1>🚀 AI Prompt Sharing & Marketplace Platform</h1>
+</div>
 
-#e2cfea
-#a06cd5
-#6247aa
-#102b3f
-#062726
-#4e148c
-#72b01d
-#ffffff
-#000000 
+---
 
+## 📖 Project Purpose
+The AI Prompt Sharing & Marketplace Platform allows users to create, discover, bookmark, and manage AI prompts for different AI tools such as ChatGPT, Gemini, Claude, Midjourney, and more[cite: 1]. The platform aims to build a modern community-driven ecosystem where users can exchange high-quality AI prompts securely and efficiently[cite: 1].
 
+---
 
+## 🔗 Live URL
+**Live Demo:** [https://prompt-hub-client.vercel.app](#)
 
+---
 
+## ✨ Key Features
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### 🔐 Authentication & Authorization
+* JWT-based secure authentication using Next.js and `better-auth`[cite: 1].
+* Role-Based Access Control protecting routes for User, Creator, and Admin roles[cite: 1].
+* Seamless Google Login integration[cite: 1].
 
-## Getting Started
+### 🔍 Explore & Discover Prompts
+* Server-side search functionality by Prompt Title, Tags, and AI Tool[cite: 1].
+* Filter prompts by Category, AI Tool, and Difficulty Level[cite: 1].
+* Sorting options for Most Popular, Most Copied, and Latest prompts[cite: 1].
 
-First, run the development server:
+### 💳 Premium Marketplace
+* One-time $5 payment system integrated with Stripe to unlock Premium access[cite: 1].
+* Content protection for private/premium prompts (locked content and copy prevention) until subscribed[cite: 1].
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 💬 Interaction Features
+* Logged-in users can bookmark and copy prompts, increasing the copy count dynamically[cite: 1].
+* Users with access can leave reviews, give ratings, and report inappropriate content[cite: 1].
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📊 Analytics & Dashboards
+* **User Dashboard:** Manage added prompts, saved prompts, and submitted reviews[cite: 1].
+* **Creator Dashboard:** View Recharts-powered analytics for total copies and prompt growth[cite: 1].
+* **Admin Dashboard:** Full control over users, prompt moderation (approve/reject with feedback), payments data, and reported prompts[cite: 1].
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack & npm Packages Used
 
-## Learn More
+### Core & Database
+* **Framework:** `next` (v16.2.9)
+* **Database:** `mongodb` 
 
-To learn more about Next.js, take a look at the following resources:
+### Authentication & Payments
+* **Auth:** `better-auth`, `@better-auth/mongo-adapter`
+* **Payments:** `stripe`, `@stripe/stripe-js`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Styling, UI & Animations
+* **Styling:** `tailwindcss`, `@tailwindcss/postcss`
+* **UI Components:** `@heroui/react`, `@heroui/styles`
+* **Animations:** `framer-motion` (Used in Banner, Featured Prompts, Reviews, etc.)[cite: 1]
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Icons, Charts & Notifications
+* **Charts:** `recharts` (For dashboard analytics)[cite: 1]
+* **Notifications:** `react-hot-toast` (For showing success/error messages)[cite: 1]
+* **Icons:** `lucide-react`, `@gravity-ui/icons`, `@iconify/react`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
