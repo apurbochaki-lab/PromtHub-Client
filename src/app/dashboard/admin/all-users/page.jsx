@@ -8,7 +8,7 @@ const AllUsersPage = async () => {
     console.log(users)
 
     return (
-        <div className="min-h-screen bg-[#121212] p-8 text-slate-200">
+        <div className="min-h-screen bg-[#121f18] p-8 text-slate-200">
             <div className="max-w-7xl mx-auto space-y-4">
                 <h2 className="text-xl font-semibold tracking-tight text-slate-100">
                     User Management ({users.length})

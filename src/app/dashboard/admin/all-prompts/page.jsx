@@ -9,7 +9,7 @@ const AdminAllPromptsPage = async () => {
     // console.log(prompts)
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto p-8">
             <div className="flex justify-between items-center pb-10">
                 <div>
                     <h2 className="text-2xl font-semibold">Prompt Template Submissions Moderation</h2>

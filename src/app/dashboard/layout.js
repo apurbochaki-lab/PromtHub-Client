@@ -29,7 +29,7 @@ export const DashboardLayout = async ({ children }) => {
                 </header>
 
                 {/* Actual Page Content */}
-                <main className="flex-1 p-6 overflow-y-auto bg-transparent relative z-10 custom-scrollbar">
+                <main className="flex-1 p-0 overflow-y-auto bg-transparent relative z-10 custom-scrollbar">
                     {children}
                 </main>
             </div>

@@ -47,49 +47,52 @@ const AllUsersTable = ({ prompts }) => {
         console.log(`View Details for ID: ${id}`);
     };
 
+    // Updated using the identical dynamic status color logic from the first table
     const getStatusStyles = (status) => {
         switch (status?.toLowerCase()) {
             case 'approved':
-                return 'text-emerald-400 bg-[#0b2416] border-[#16472b]';
+                return 'text-[#72b01d] bg-[#72b01d]/10 border-[#72b01d]/30';
             case 'rejected':
-                return 'text-rose-400 bg-[#2b1616] border-rose-900/60';
+                return 'text-red-400 bg-red-400/10 border-red-400/30';
             case 'pending':
             default:
-                return 'text-amber-400 bg-[#291e0a] border-[#4d3813]';
+                return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30';
         }
     };
 
     return (
-        <div className="w-full bg-[#080d0b] text-zinc-400 p-6 rounded-xl border border-[#14241a] shadow-2xl font-sans">
+        // Wrapper background and border synced with first table theme
+        <div className="w-full bg-[#0b1410] text-white p-6 rounded-xl border border-[#72b01d]/50 shadow-2xl font-sans">
             {/* <div className="mb-6">
                 <h2 className="text-2xl font-bold text-white tracking-tight">Prompt Template Submissions Moderation</h2>
                 <p className="text-sm text-[#8b9d93] mt-1">Approve templates, reject with feedback, or tag featured highlights.</p>
             </div> */}
 
             <Table
-                className="bg-transparent"
+                variant="primary"
+                className="bg-[#0b1410] border-none"
                 classnames={{
-                    wrapper: "bg-[#080d0b] shadow-none p-0 border border-[#14241a] rounded-lg overflow-hidden",
-                    th: "bg-[#0a120e] text-[#6b967e] text-xs font-semibold uppercase tracking-wider py-4 px-6 border-b border-[#14241a] select-none first:rounded-l-lg last:rounded-r-lg",
-                    td: "py-4 px-6 align-middle border-b border-[#14241a]/50 text-zinc-400 group-hover:bg-[#0d1712] transition-colors duration-150",
-                    tr: "hover:bg-[#0d1712] border-b border-[#14241a]/50 bg-[#080d0b]",
-                    tbody: "bg-[#080d0b] divide-y divide-[#14241a]/60",
-                    base: "bg-[#080d0b]",
+                    base: "bg-[#0b1410]",
+                    wrapper: "bg-[#0b1410] shadow-none border-none p-0",
+                    th: "bg-[#0b1410] border-b border-[#72b01d]/20 text-[#8fbc8f] text-xs font-semibold uppercase tracking-wider py-4 px-6 select-none",
+                    td: "bg-[#0b1410] text-white py-4 px-6 align-middle border-none",
+                    tr: "bg-[#0b1410] hover:bg-[#111111] border-none",
+                    tbody: "bg-[#0b1410] divide-y divide-[#72b01d]/10 text-white",
                 }}
             >
-                <Table.ScrollContainer>
-                    <Table.Content aria-label="Prompt moderation table">
-                        <Table.Header>
-                            <Table.Column isRowHeader>Template Title</Table.Column>
-                            <Table.Column>Creator</Table.Column>
-                            <Table.Column>AI Engine</Table.Column>
-                            <Table.Column>Visibility</Table.Column>
-                            <Table.Column>Featured</Table.Column>
-                            <Table.Column>Status</Table.Column>
-                            <Table.Column className="text-right">Actions</Table.Column>
+                <Table.ScrollContainer className="bg-[#0b1410]">
+                    <Table.Content aria-label="Prompt moderation table" className="bg-[#0b1410] text-white">
+                        <Table.Header className="bg-[#0b1410] text-[#8fbc8f] uppercase text-xs tracking-wider border-b border-[#72b01d]/20">
+                            <Table.Column isRowHeader className="bg-[#0b1410] border-none">Template Title</Table.Column>
+                            <Table.Column className="bg-[#0b1410] border-none">Creator</Table.Column>
+                            <Table.Column className="bg-[#0b1410] border-none">AI Engine</Table.Column>
+                            <Table.Column className="bg-[#0b1410] border-none">Visibility</Table.Column>
+                            <Table.Column className="bg-[#0b1410] border-none">Featured</Table.Column>
+                            <Table.Column className="bg-[#0b1410] border-none">Status</Table.Column>
+                            <Table.Column className="text-right bg-[#0b1410] border-none">Actions</Table.Column>
                         </Table.Header>
 
-                        <Table.Body className="bg-[#080d0b] divide-y divide-[#14241a]/60">
+                        <Table.Body className="bg-[#0b1410] divide-y divide-[#72b01d]/10 text-white">
                             {prompts.map((prompt) => {
                                 const promptId = prompt._id?.$oid || prompt._id;
                                 const status = prompt.status?.toLowerCase();
@@ -97,126 +100,117 @@ const AllUsersTable = ({ prompts }) => {
                                 const isFeatured = prompt?.isFeatured;
 
                                 return (
-                                    <Table.Row key={promptId} className="hover:bg-[#0d1712] border-b border-[#14241a]/50 bg-[#080d0b] transition-colors duration-150">
-                                        <Table.Cell className="font-medium text-zinc-200 whitespace-nowrap">
+                                    <Table.Row key={promptId} className="bg-[#0b1410] hover:bg-black transition-colors group">
+
+                                        {/* Template Title */}
+                                        <Table.Cell className="bg-transparent font-medium text-white whitespace-nowrap border-none">
                                             <div className="flex flex-col">
-                                                <span className="font-semibold text-zinc-200 text-sm">{prompt.title}</span>
-                                                <span className="text-xs text-zinc-500 mt-0.5">Category: {prompt.category}</span>
+                                                <span className="text-[#ffffff] font-medium text-sm group-hover:text-[#95d542] transition-colors">{prompt.title}</span>
+                                                <span className="text-[#8fbc8f] text-xs mt-1">Category: {prompt.category}</span>
                                             </div>
                                         </Table.Cell>
 
-                                        <Table.Cell className="text-[#8b9d93] whitespace-nowrap">
+                                        {/* Creator */}
+                                        <Table.Cell className="bg-transparent text-[#8fbc8f] whitespace-nowrap border-none">
                                             <div className="flex flex-col">
-                                                <span className="font-medium text-zinc-200 text-sm">{prompt.creatorName || 'Creator'}</span>
-                                                <span className="text-xs text-neutral-500 mt-0.5">{prompt.creatorEmail}</span>
+                                                <span className="font-medium text-white text-sm">{prompt.creatorName || 'Creator'}</span>
+                                                <span className="text-xs text-[#8fbc8f] mt-0.5">{prompt.creatorEmail}</span>
                                             </div>
                                         </Table.Cell>
 
-                                        <Table.Cell className="whitespace-nowrap">
-                                            <span className="px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-md text-[10px] font-bold uppercase tracking-widest">
+                                        {/* AI Engine */}
+                                        <Table.Cell className="bg-transparent whitespace-nowrap border-none">
+                                            <span className="px-3 py-1 text-xs rounded-full bg-[#044a2b]/40 text-[#ffffff] border border-[#72b01d]/20">
                                                 {prompt.aiTool}
                                             </span>
                                         </Table.Cell>
 
-                                        <Table.Cell className="text-zinc-300 text-sm whitespace-nowrap">
+                                        {/* Visibility */}
+                                        <Table.Cell className="bg-transparent text-[#8fbc8f] text-sm whitespace-nowrap border-none">
                                             {prompt.isPrivate ? 'Private' : 'Public'}
                                         </Table.Cell>
 
-                                        <Table.Cell className="whitespace-nowrap">
-                                            {/* <Button
-                                                size="sm"
-                                                variant="bordered"
-                                                onClick={() => {
-                                                    // setToggleMap(prev => ({ ...prev, [promptId]: !prev[promptId] }));
-                                                    handleFeaturedToggle(prompt?._id);
-                                                }}
-                                                startContent={
-                                                    isFeatured ? (
-                                                        <StarFill className="text-amber-400" width={14} height={14} />
-                                                    ) : (
-                                                        <Star className="text-neutral-500" width={14} height={14} />
-                                                    )
-                                                }
-                                                className={`h-auto min-w-0 px-3 py-1.5 rounded-md border text-xs font-semibold font-sans transition-all ${isFeatured
-                                                    ? 'bg-amber-500/10 border-amber-500 text-amber-400'
-                                                    : 'bg-transparent border-[#1c3325] text-neutral-400 hover:text-neutral-200 hover:border-neutral-500'
-                                                    }`}
-                                            >
-                                                {isFeatured ? 'Featured' : 'Feature'}
-                                            </Button> */}
-
+                                        {/* Featured Button with transparent/accent rules */}
+                                        <Table.Cell className="bg-transparent whitespace-nowrap border-none">
                                             <Button
                                                 onClick={() => handleFeaturedToggle(promptId, !isFeatured)}
-                                                className={`bg-black/85 border-2 p-2 rounded-lg ${isFeatured ? "text-red-500 font-semibold border-red-500" : ""
+                                                className={`bg-transparent border p-2 rounded-lg transition-colors ${isFeatured
+                                                        ? "text-yellow-400 font-semibold border-yellow-400/50 hover:bg-yellow-400/10"
+                                                        : "text-white border-transparent hover:border-[#72b01d]/30 hover:text-[#95d542]"
                                                     } flex items-center gap-2`}
                                             >
                                                 {isFeatured ? "⭐ Featured" : "Feature"}
                                             </Button>
-
                                         </Table.Cell>
 
-                                        <Table.Cell className="whitespace-nowrap">
-                                            <span className={`px-2 py-0.5 border rounded text-[10px] font-bold uppercase tracking-wide ${statusStyles}`}>
+                                        {/* Status */}
+                                        <Table.Cell className="bg-transparent whitespace-nowrap border-none">
+                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md border text-xs font-semibold capitalize ${statusStyles}`}>
                                                 {prompt.status}
                                             </span>
                                         </Table.Cell>
 
-                                        <Table.Cell className="text-right whitespace-nowrap">
-                                            <div className="flex items-center justify-end gap-2">
+                                        {/* Actions */}
+                                        <Table.Cell className="bg-transparent text-right whitespace-nowrap border-none">
+                                            <div className="flex items-center justify-end gap-3">
+
+                                                {/* View Details Button */}
                                                 <Link href={`/prompts/${prompt?._id}`} title="View Details">
                                                     <Button
                                                         isIconOnly
                                                         size="sm"
-                                                        variant="bordered"
+                                                        variant="outline"
                                                         onClick={() => handleViewDetails(promptId)}
-                                                        className="text-[#6b967e] hover:text-white border-[#1c3325] hover:bg-[#14241a]/60 rounded-lg min-w-0 w-8 h-8"
+                                                        className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
                                                         title="View Details"
                                                     >
-                                                        <Eye width={14} height={14} />
+                                                        <Eye width={18} />
                                                     </Button>
                                                 </Link>
 
+                                                {/* Approve Button */}
                                                 {(status === 'pending' || status === 'rejected') && (
                                                     <span title='Approve'>
                                                         <Button
                                                             isIconOnly
                                                             size="sm"
-                                                            variant="bordered"
+                                                            variant="outline"
                                                             onClick={() => handleStatusChange(promptId, 'approved')}
-                                                            className="text-[#4ade80] hover:text-[#34c76b] border-[#1c3325] hover:bg-[#0b2416] rounded-lg min-w-0 w-8 h-8"
+                                                            className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
                                                             title="Approve"
                                                         >
-                                                            <Check width={14} height={14} />
+                                                            <Check width={18} />
                                                         </Button>
                                                     </span>
                                                 )}
 
-                                                {/* Status : Rejected */}
+                                                {/* Reject Button */}
                                                 {(status === 'pending' || status === 'approved') && (
                                                     <span title='Reject'>
                                                         <Button
                                                             isIconOnly
                                                             size="sm"
-                                                            variant="bordered"
+                                                            variant="outline"
                                                             onClick={() => handleStatusChange(promptId, 'rejected')}
-                                                            className="text-rose-500 hover:text-rose-400 border-[#1c3325] hover:bg-[#2b1616] rounded-lg min-w-0 w-8 h-8"
+                                                            className="bg-transparent text-white hover:text-red-400 transition-colors p-2 rounded-lg border border-transparent hover:border-red-400/30 min-w-0 w-9 h-9"
                                                             title="Reject"
                                                         >
-                                                            <Xmark width={14} height={14} />
+                                                            <Xmark width={18} />
                                                         </Button>
                                                     </span>
                                                 )}
 
+                                                {/* Delete Button */}
                                                 <span title='Delete prompt'>
                                                     <Button
                                                         isIconOnly
                                                         size="sm"
-                                                        variant="bordered"
+                                                        variant="outline"
                                                         onClick={() => handleDelete(promptId)}
-                                                        className="p-2 min-w-0 w-8 h-8 bg-[#2b1616] hover:bg-[#3d1a1a] border-none text-red-400 rounded-lg transition-all"
+                                                        className="bg-transparent text-[#8fbc8f] hover:text-[#ef4444] hover:border-[#ef4444] hover:bg-[#ef4444]/10 transition-all rounded-lg border border-transparent min-w-0 w-9 h-9"
                                                         title="Delete"
                                                     >
-                                                        <TrashBin width={14} height={14} />
+                                                        <TrashBin width={18} />
                                                     </Button>
                                                 </span>
                                             </div>
