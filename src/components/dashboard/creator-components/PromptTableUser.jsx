@@ -91,6 +91,10 @@ const PromptsTableUser = ({ prompts }) => {
                                             <div className="flex flex-col">
                                                 <span className="text-[#ffffff] font-medium text-sm group-hover:text-[#95d542] transition-colors">{prompt.title}</span>
                                                 <span className="text-[#8fbc8f] text-xs mt-1">Category: {prompt.category}</span>
+
+                                                <span className="text-red-500 font-bold py-3">
+                                                    {prompt.isWarned && "⚠️ Warning from admin"}
+                                                </span>
                                             </div>
                                         </Table.Cell>
 

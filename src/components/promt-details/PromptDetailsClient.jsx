@@ -98,6 +98,7 @@ const PromptDetailsClient = ({ prompt, currentSessionUser, recentReviews }) => {
         const reportData = {
             ...data,
             promptId: prompt?._id,
+            promptTitle: prompt?.title,
             creatorId: prompt?.creatorId,
             reporterId: currentSessionUser?.id
         }
