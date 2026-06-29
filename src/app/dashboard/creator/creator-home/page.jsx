@@ -18,9 +18,9 @@ const CreatorHomepage = async () => {
     const totalBookmarks = stats?.totalBookmarkCount || 0;
 
     return (
-        <div className="min-h-screen bg-[#000000] p-6 lg:p-2 max-w-7xl mx-auto">
+        <div className="min-h-screen bg-[#000000] p-6 lg:p-2 max-w-7xl mx-auto mb-20">
             {/* Dashboard Header Text */}
-            <div className="mb-8 mt-4">
+            <div className="mb-8 mt-4 container mx-auto">
                 <h1 className="text-3xl font-bold text-emerald-50 tracking-tight">
                     Creator Analytics Dashboard
                 </h1>

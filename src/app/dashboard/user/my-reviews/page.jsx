@@ -8,7 +8,7 @@ const MyReviewsPage = async () => {
     const myReviews = await getMyReviews(user?.id);
 
     return (
-        <section className="space-y-8">
+        <section className="space-y-8 p-8">
             <div>
                 <h1 className="text-4xl font-bold text-white">
                     My Reviews

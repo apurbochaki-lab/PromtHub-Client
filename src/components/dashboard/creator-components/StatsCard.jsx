@@ -27,7 +27,7 @@ const StatsCard = ({ totalPrompt, totalCopies, totalBookmarks }) => {
     ];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mt-8 mx-auto">
             {statItems.map((item, index) => (
                 <div
                     key={index}

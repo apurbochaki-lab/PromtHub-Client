@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Magnifier, Sparkles, Compass, Flame } from '@gravity-ui/icons';
 import { Button } from '@heroui/react';
+import Link from 'next/link';
 
 const Banner = () => {
     // Randomly static trending tags
@@ -81,12 +82,14 @@ const Banner = () => {
                                 placeholder="Search for 'marketing strategy', 'web design'..."
                                 className="flex-1 bg-transparent text-[#ffffff] placeholder-[#e2cfea]/50 border-none outline-none text-lg px-2"
                             />
-                            <Button
-                                size="lg"
-                                className="bg-[#a06cd5] hover:bg-[#6247aa] text-white font-bold rounded-full px-8 transition-transform duration-300 hover:scale-105"
-                            >
-                                Explore
-                            </Button>
+                            <Link href={"/prompts"}>
+                                <Button
+                                    size="lg"
+                                    className="bg-[#a06cd5] hover:bg-[#6247aa] text-white font-bold rounded-full px-8 transition-transform duration-300 hover:scale-105"
+                                >
+                                    Explore
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
 
@@ -106,20 +109,15 @@ const Banner = () => {
                     </motion.div>
 
                     {/* Call To Action (CTA) Buttons */}
-                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
-                        <Button
-                            size="lg"
-                            className="bg-gradient-to-r from-[#72b01d] to-[#4e148c] text-white font-bold rounded-xl px-8 shadow-[0_4px_15px_rgba(114,176,29,0.3)] hover:shadow-[0_6px_20px_rgba(114,176,29,0.5)] transition-all duration-300 hover:-translate-y-1"
-                        >
-                            <Compass size={20} /> Browse Categories
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="border-2 border-[#a06cd5] text-[#e2cfea] font-bold rounded-xl px-8 hover:bg-[#a06cd5]/10 transition-all duration-300 hover:-translate-y-1 mx-auto"
-                        >
-                            Share a Prompt
-                        </Button>
+                    <motion.div variants={itemVariants} className="">
+                        <Link href={"/prompts"}>
+                            <Button
+                                size="lg"
+                                className="bg-gradient-to-r from-[#72b01d] to-[#4e148c] text-white font-bold rounded-xl px-8 shadow-[0_4px_15px_rgba(114,176,29,0.3)] hover:shadow-[0_6px_20px_rgba(114,176,29,0.5)] transition-all duration-300 hover:-translate-y-1"
+                            >
+                                <Compass size={20} /> Browse Categories
+                            </Button>
+                        </Link>
                     </motion.div>
 
                 </motion.div>
