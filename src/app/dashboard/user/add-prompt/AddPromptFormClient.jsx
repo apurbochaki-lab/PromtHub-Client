@@ -54,12 +54,16 @@ const AddPromptFormClient = ({ user }) => {
             creatorId: user?.id,
             creatorName: user?.name,
             creatorEmail: user?.email,
+
+            // Default value
             status: "pending",
             copyCount: 0,
             bookmarkCount: 0,
             rating: 0,
             ratingSum: 0,
-            reviewCount: 0
+            reviewCount: 0,
+            isWarned: false,
+            isFeatured: false
         };
 
         const res = await serverMutation('/api/prompts', newData);

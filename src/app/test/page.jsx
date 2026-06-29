@@ -3,6 +3,8 @@
 
 import { Button } from "@heroui/react";
 import { ModalFormCreator } from "../../components/Common/ModalFormCreator";
+import RejectPromptModal from "./RejectPromptModal";
+import { RejectedModal } from "./RejectedModal";
 
 const ModalPage = () => {
     return (
@@ -12,6 +14,10 @@ const ModalPage = () => {
             <div>
                 
                 <ModalFormCreator/>
+
+                <RejectPromptModal/>
+
+                <RejectedModal/>
             </div>
         </div>
     );

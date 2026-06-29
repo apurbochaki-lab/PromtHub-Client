@@ -55,14 +55,16 @@ const AddPromptCreator = ({ user }) => {
             creatorId: user?.id,
             creatorName: user?.name,
             creatorEmail: user?.email,
-            
+
             // Default data
             status: "pending",
             copyCount: 0,
             bookmarkCount: 0,
             rating: 0,
             ratingSum: 0,
-            reviewCount: 0
+            reviewCount: 0,
+            isWarned: false,
+            isFeatured: false
         };
 
         // console.log(newData)
