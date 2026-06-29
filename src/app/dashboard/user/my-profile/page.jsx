@@ -26,6 +26,10 @@ const MyProfilePage = async () => {
         promptsPublished: 0
     };
 
+    if (!currentUser || currentUser?.role !== "user") {
+        redirect("/error/unauthorized");
+    }
+
     return (
         <div className="relative min-h-[80vh] w-full bg-[#000000] p-6 md:p-10 overflow-hidden rounded-2xl">
 

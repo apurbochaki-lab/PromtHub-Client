@@ -83,12 +83,14 @@ const ReportCard = ({ reports = [] }) => {
         );
     }
 
+    // from-[#14352f] via-[#173d36] to-[#112d28]
+
     return (
         <div className="space-y-5">
             {reports?.map((report) => (
                 <div
                     key={report?._id}
-                    className="max-w-[1200px] mx-auto rounded-2xl border border-[#31544d] bg-gradient-to-br from-[#14352f] via-[#173d36] to-[#112d28] p-5 shadow-lg transition-all duration-300 hover:border-teal-400/40 hover:shadow-xl"
+                    className="max-w-[1200px] mx-auto rounded-2xl border border-[#31544d] bg-gradient-to-br from-[#102c27] via-[#12332d] to-[#0b201d] p-5 shadow-lg transition-all duration-300 hover:border-teal-400/40 hover:shadow-xl"
                 >
                     {/* Header */}
                     <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">

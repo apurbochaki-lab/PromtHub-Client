@@ -1,3 +1,4 @@
+import { getMyPrompts } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
 import {
     Person,
@@ -9,15 +10,18 @@ import {
     ArrowUpRight
 } from "@gravity-ui/icons";
 import Link from "next/link";
-import { redirect } from "next/navigation"; // রোল গার্ডের জন্য রিডাইরেক্ট ইম্পোর্ট করা হলো
+import { redirect } from "next/navigation";
 
 const MyProfilePage = async () => {
     const currentUser = await getUserSession();
-    const myPostCount = 5;
 
-    // 🔴 1. Strict Role Guard: ক্রিয়েটর ছাড়া অন্য কেউ আসলে হোমে রিডাইরেক্ট করে দেবে
+    const creatorId = currentUser?.id || null;
+    const myPrompts = (await getMyPrompts(creatorId)) || [];
+    const myPostCount = myPrompts.length;
+
+
     if (!currentUser || currentUser?.role !== "creator") {
-        redirect("/");
+        redirect("/error/unauthorized");
     }
 
     const user = currentUser || {

@@ -109,8 +109,8 @@ const AnalyticsCards = ({ analytics }) => {
                                 <div
                                     className={`
                     flex
-                    h-16
-                    w-16
+                    h-12
+                    w-12
                     items-center
                     justify-center
                     rounded-2xl
@@ -125,7 +125,7 @@ const AnalyticsCards = ({ analytics }) => {
                   `}
                                 >
                                     <Icon
-                                        className={`${card.iconColor} h-8 w-8 transition-transform duration-500 group-hover:scale-125`}
+                                        className={`${card.iconColor} h-6 w-6 transition-transform duration-500 group-hover:scale-125`}
                                     />
                                 </div>
                             </div>

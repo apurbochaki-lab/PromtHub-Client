@@ -11,7 +11,7 @@ const AdminAnalyticsPage = async () => {
     const tools = await getAiToolCount();
 
     return (
-        <div className="space-y-8 container mx-auto pb-10">
+        <div className="space-y-8 container mx-auto pb-10 p-8">
             <div>
                 <h1 className="text-3xl font-bold">Administrative Analytics</h1>
                 <p className="text-default-500 mt-2">
