@@ -18,7 +18,7 @@ export default function LoginPage() {
 
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries());
-        console.log("Login Data:", userData);
+        // console.log("Login Data:", userData);
 
         // TODO: Login logic via better-auth client
         const { data, error } = await authClient.signIn.email({

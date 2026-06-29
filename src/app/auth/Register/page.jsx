@@ -5,7 +5,6 @@ import { Check, Xmark, Person, Envelope, Link as LinkIcon, Lock, Thunderbolt } f
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
 
@@ -16,7 +15,7 @@ export default function RegisterPage() {
 
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries());
-        console.log("Registered Data:", userData);
+        // console.log("Registered Data:", userData);
 
         // Register Logic via better-auth client
         const { data, error } = await authClient.signUp.email({
