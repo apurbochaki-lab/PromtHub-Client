@@ -30,16 +30,81 @@ const AddPromptCreator = ({ user }) => {
 
     const router = useRouter()
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     toast.success("Adding prompt...");
+
+    //     const formData = new FormData(e.target);
+    //     const data = Object.fromEntries(formData.entries());
+    //     const image = await imageUpload(data?.image);
+
+    //     Object.keys(data).forEach(key => {
+    //         if (key.startsWith('react-aria')) {
+    //             delete data[key];
+    //         }
+    //     });
+
+    //     delete data.visibilityStatus;
+    //     data.isPrivate = isPrivate;
+
+    //     // ---------------------------------------------------
+
+    //     const newData = {
+    //         ...data,
+    //         image: image?.url || "https://thumbs.dreamstime.com/b/computer-displaying-ai-programming-code-screen-blurred-modern-office-background-computer-displaying-ai-programming-code-375635675.jpg",
+    //         creatorId: user?.id,
+    //         creatorName: user?.name,
+    //         creatorEmail: user?.email,
+
+    //         // Default data
+    //         status: "pending",
+    //         copyCount: 0,
+    //         bookmarkCount: 0,
+    //         rating: 0,
+    //         ratingSum: 0,
+    //         reviewCount: 0,
+    //         isWarned: false,
+    //         isFeatured: false
+    //     };
+
+    //     // console.log(newData)
+
+    //     const res = await serverMutation('/api/add-prompt-creator', newData);
+    //     // console.log("response:", res)
+
+    //     if (res.insertedId) {
+    //         toast.success("Prompt added");
+    //         e.target.reset();
+    //         setFileName(null);
+    //         router.push("/dashboard/creator/my-prompts")
+    //     }
+    //     else {
+    //         toast.error("Something went wrong!");
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         toast.success("Adding prompt...");
 
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
-        const image = await imageUpload(data?.image);
 
-        Object.keys(data).forEach(key => {
-            if (key.startsWith('react-aria')) {
+        // Default image
+        let imageUrl =
+            "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80";
+
+        // Upload only if user selected an image
+        if (data.image && data.image.size > 0) {
+            const uploadedImage = await imageUpload(data.image);
+
+            if (uploadedImage?.url) {
+                imageUrl = uploadedImage.url;
+            }
+        }
+
+        Object.keys(data).forEach((key) => {
+            if (key.startsWith("react-aria")) {
                 delete data[key];
             }
         });
@@ -47,11 +112,9 @@ const AddPromptCreator = ({ user }) => {
         delete data.visibilityStatus;
         data.isPrivate = isPrivate;
 
-        // ---------------------------------------------------
-
         const newData = {
             ...data,
-            image: image?.url || "https://thumbs.dreamstime.com/b/computer-displaying-ai-programming-code-screen-blurred-modern-office-background-computer-displaying-ai-programming-code-375635675.jpg",
+            image: imageUrl,
             creatorId: user?.id,
             creatorName: user?.name,
             creatorEmail: user?.email,
@@ -64,21 +127,17 @@ const AddPromptCreator = ({ user }) => {
             ratingSum: 0,
             reviewCount: 0,
             isWarned: false,
-            isFeatured: false
+            isFeatured: false,
         };
 
-        // console.log(newData)
-
-        const res = await serverMutation('/api/add-prompt-creator', newData);
-        console.log("response:", res)
+        const res = await serverMutation("/api/add-prompt-creator", newData);
 
         if (res.insertedId) {
             toast.success("Prompt added");
             e.target.reset();
             setFileName(null);
-            router.push("/dashboard/creator/my-prompts")
-        }
-        else {
+            router.push("/dashboard/creator/my-prompts");
+        } else {
             toast.error("Something went wrong!");
         }
     };

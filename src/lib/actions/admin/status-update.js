@@ -1,7 +1,7 @@
 import { serverMutation } from "@/lib/core/server"
 
-export const updatePromptStatus = async (promptId, status) => {
-    return serverMutation(`/api/admin/update-status?promptId=${promptId}&status=${status}`, {}, 'PATCH')
+export const updatePromptStatus = async (promptId, status, reason) => {
+    return serverMutation(`/api/admin/update-status?promptId=${promptId}&status=${status}&reason=${reason}`, {}, 'PATCH')
 }
 
 export const deletePromptAdmin = async (promptId) => {

@@ -1,5 +1,4 @@
 import PromptsTableUser from "@/components/dashboard/creator-components/PromptTableUser";
-import PromptsTableClient from "@/components/dashboard/user-components/PromptsTableClient";
 import { getMyPrompts } from "@/lib/api/prompts";
 import { getUserSession } from "@/lib/core/session";
 import { Button } from "@heroui/react";
@@ -12,6 +11,7 @@ const MyPromptsPage = async () => {
 
     const myPrompts = await getMyPrompts(creatorId) || [];
     console.log(myPrompts.length)
+    // console.log(myPrompts)
 
     return (
         // Added dark bg and relative wrapper for the glow

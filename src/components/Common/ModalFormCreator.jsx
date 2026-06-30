@@ -55,7 +55,7 @@ export function ModalFormCreator({ prompt }) {
     return (
         <Modal>
             <Button
-                variant="outline" className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
+                variant="outline" className="bg-amber-500/50 text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30" title="Edit Data">
                 <Pencil width={18} />
             </Button>
 

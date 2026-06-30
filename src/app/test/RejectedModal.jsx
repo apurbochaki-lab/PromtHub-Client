@@ -8,8 +8,6 @@ export function RejectedModal() {
         <Modal>
             <Button variant="secondary">Open Modal</Button>
 
-
-            
             <Modal.Backdrop>
                 <Modal.Container>
                     <Modal.Dialog className="sm:max-w-[360px] bg-[#07381a]">

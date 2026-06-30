@@ -1,5 +1,5 @@
 
-import AllUsersTable from "@/components/dashboard/admin-dashboard/AllPromptsTable";
+import AllPromptsTable from "@/components/dashboard/admin-dashboard/AllPromptsTable";
 import { getAllPrompts } from "@/lib/api/admin/all-users";
 
 
@@ -18,7 +18,7 @@ const AdminAllPromptsPage = async () => {
                 <h2>Total Prompt : {prompts.length} </h2>
             </div>
 
-            <AllUsersTable prompts={prompts} />
+            <AllPromptsTable prompts={prompts} />
         </div>
     );
 };

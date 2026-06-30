@@ -92,9 +92,28 @@ const PromptsTableUser = ({ prompts }) => {
                                                 <span className="text-[#ffffff] font-medium text-sm group-hover:text-[#95d542] transition-colors">{prompt.title}</span>
                                                 <span className="text-[#8fbc8f] text-xs mt-1">Category: {prompt.category}</span>
 
-                                                <span className="text-red-500 font-bold py-3">
-                                                    {prompt.isWarned && "⚠️ Warning from admin"}
-                                                </span>
+                                                {prompt?.rejectedReason && (
+                                                    <div className="py-3">
+                                                        <div className="inline-flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2">
+                                                            <span className="text-sm">🚫</span>
+                                                            <span
+                                                                className="max-w-[180px] text-xs font-medium text-red-200"
+                                                                title={prompt?.rejectedReason}
+                                                            >
+                                                                {prompt?.rejectedReason}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {prompt?.isWarned && (
+                                                    <div className="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 max-w-[220px]">
+                                                        <span className="text-lg">⚠️</span>
+                                                        <span className="text-sm font-semibold tracking-wide text-yellow-300">
+                                                            Warning from Admin
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </Table.Cell>
 
@@ -130,8 +149,10 @@ const PromptsTableUser = ({ prompts }) => {
 
                                         {/* Actions */}
                                         <Table.Cell className="bg-transparent py-4 px-4 text-right border-none">
-                                            <div className="flex items-center justify-end gap-3 ">
-                                                <Link href={`/prompts/${prompt?._id}`} className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2.5 rounded-lg border border-transparent hover:border-[#72b01d]/30" title="View Details">
+                                            <div className="flex items-center justify-end gap-5 ">
+                                                <Link href={`/prompts/${prompt?._id}`} className="bg-blue-500 text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
+                                                    title="View Details"
+                                                >
                                                     <Eye width={18} />
                                                 </Link>
 
@@ -146,7 +167,7 @@ const PromptsTableUser = ({ prompts }) => {
 
                                                 <Button variant="outline"
                                                     onClick={() => setSelectedAnalytics(prompt)}
-                                                    className="bg-transparent text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30"
+                                                    className="bg-[#22571b] text-white hover:text-[#95d542] transition-colors p-3 rounded-lg border-transparent hover:border-[#72b01d]/30"
                                                     title="Analytics"
                                                 >
                                                     <ChartColumn width={18} />
@@ -156,8 +177,8 @@ const PromptsTableUser = ({ prompts }) => {
                                                 <AlertDialog>
                                                     <Button
                                                         isIconOnly
-                                                        variant="outline"
-                                                        className="bg-transparent text-[#8fbc8f] hover:text-[#ef4444] hover:border-[#ef4444] hover:bg-[#ef4444]/10 transition-all rounded-lg border-transparent"
+                                                        variant="danger-soft"
+                                                        className=" text-red-500 hover:text-[#ef4444] hover:border-[#ef4444] hover:bg-[#ef4444]/10 transition-all rounded-lg border-transparent"
                                                         title="Delete"
                                                     >
                                                         <TrashBin width={18} />
