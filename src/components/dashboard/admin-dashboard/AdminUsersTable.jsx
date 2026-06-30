@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from '@gravity-ui/icons';
 import { AlertDialog, Button } from "@heroui/react";
 import { updateUserRole } from '@/lib/actions/admin/users-update';
 import toast from 'react-hot-toast';

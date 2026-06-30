@@ -105,7 +105,7 @@ const AllUsersTable = ({ prompts }) => {
                                         {/* Template Title */}
                                         <Table.Cell className="bg-transparent font-medium text-white whitespace-nowrap border-none">
                                             <div className="flex flex-col">
-                                                <span className="text-[#ffffff] font-medium text-sm group-hover:text-[#95d542] transition-colors">{prompt.title}</span>
+                                                <span className="text-[#ffffff] font-medium text-sm group-hover:text-[#95d542] transition-colors">{prompt.title.slice(0, 30)}...</span>
                                                 <span className="text-[#8fbc8f] text-xs mt-1">Category: {prompt.category}</span>
                                             </div>
                                         </Table.Cell>
@@ -134,9 +134,9 @@ const AllUsersTable = ({ prompts }) => {
                                         <Table.Cell className="bg-transparent whitespace-nowrap border-none">
                                             <Button
                                                 onClick={() => handleFeaturedToggle(promptId, !isFeatured)}
-                                                className={`bg-transparent border p-2 rounded-lg transition-colors ${isFeatured
-                                                        ? "text-yellow-400 font-semibold border-yellow-400/50 hover:bg-yellow-400/10"
-                                                        : "text-white border-transparent hover:border-[#72b01d]/30 hover:text-[#95d542]"
+                                                className={`bg-transparent border p-2 rounded-lg transition-colors mx-auto ${isFeatured
+                                                        ? "text-yellow-400 font-semibold border-yellow-400/50"
+                                                        : "text-white/70 border-white/50 hover:border-[#72b01d]/30 hover:text-[#95d542]"
                                                     } flex items-center gap-2`}
                                             >
                                                 {isFeatured ? "⭐ Featured" : "Feature"}
@@ -152,16 +152,16 @@ const AllUsersTable = ({ prompts }) => {
 
                                         {/* Actions */}
                                         <Table.Cell className="bg-transparent text-right whitespace-nowrap border-none">
-                                            <div className="flex items-center justify-end gap-3">
+                                            <div className="flex items-center justify-end gap-5">
 
                                                 {/* View Details Button */}
                                                 <Link href={`/prompts/${prompt?._id}`} title="View Details">
                                                     <Button
                                                         isIconOnly
                                                         size="sm"
-                                                        variant="outline"
+                                                        variant="primary"
                                                         onClick={() => handleViewDetails(promptId)}
-                                                        className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
+                                                        className="bg-blue-500 text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
                                                         title="View Details"
                                                     >
                                                         <Eye width={18} />
@@ -176,7 +176,7 @@ const AllUsersTable = ({ prompts }) => {
                                                             size="sm"
                                                             variant="outline"
                                                             onClick={() => handleStatusChange(promptId, 'approved')}
-                                                            className="bg-transparent text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
+                                                            className="bg-green-500/50 text-white hover:text-[#95d542] transition-colors p-2 rounded-lg border border-transparent hover:border-[#72b01d]/30 min-w-0 w-9 h-9"
                                                             title="Approve"
                                                         >
                                                             <Check width={18} />
@@ -192,7 +192,7 @@ const AllUsersTable = ({ prompts }) => {
                                                             size="sm"
                                                             variant="outline"
                                                             onClick={() => handleStatusChange(promptId, 'rejected')}
-                                                            className="bg-transparent text-white hover:text-red-400 transition-colors p-2 rounded-lg border border-transparent hover:border-red-400/30 min-w-0 w-9 h-9"
+                                                            className="bg-red-500/50 text-white hover:text-red-400 transition-colors p-2 rounded-lg border border-transparent hover:border-red-400/30 min-w-0 w-9 h-9"
                                                             title="Reject"
                                                         >
                                                             <Xmark width={18} />
@@ -205,9 +205,9 @@ const AllUsersTable = ({ prompts }) => {
                                                     <Button
                                                         isIconOnly
                                                         size="sm"
-                                                        variant="outline"
+                                                        variant="danger-soft"
                                                         onClick={() => handleDelete(promptId)}
-                                                        className="bg-transparent text-[#8fbc8f] hover:text-[#ef4444] hover:border-[#ef4444] hover:bg-[#ef4444]/10 transition-all rounded-lg border border-transparent min-w-0 w-9 h-9"
+                                                        className=" text-red-500 hover:text-[#ef4444] hover:border-[#ef4444] hover:bg-[#ef4444]/10 transition-all rounded-lg border border-transparent min-w-0 w-9 h-9"
                                                         title="Delete"
                                                     >
                                                         <TrashBin width={18} />
