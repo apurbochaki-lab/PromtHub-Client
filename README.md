@@ -6,7 +6,7 @@
 ---
 
 ## 📖 Project Purpose
-The AI Prompt Sharing & Marketplace Platform allows users to create, discover, bookmark, and manage AI prompts for different AI tools such as ChatGPT, Gemini, Claude, Midjourney, and more[cite: 1]. The platform aims to build a modern community-driven ecosystem where users can exchange high-quality AI prompts securely and efficiently[cite: 1].
+The AI Prompt Sharing & Marketplace Platform allows users to create, discover, bookmark, and manage AI prompts for different AI tools such as ChatGPT, Gemini, Claude, Midjourney, and more. The platform aims to build a modern community-driven ecosystem where users can exchange high-quality AI prompts securely and efficiently.
 
 ---
 
@@ -18,27 +18,27 @@ The AI Prompt Sharing & Marketplace Platform allows users to create, discover, b
 ## ✨ Key Features
 
 ### 🔐 Authentication & Authorization
-* JWT-based secure authentication using Next.js and `better-auth`[cite: 1].
-* Role-Based Access Control protecting routes for User, Creator, and Admin roles[cite: 1].
-* Seamless Google Login integration[cite: 1].
+* JWT-based secure authentication using Next.js and `better-auth`.
+* Role-Based Access Control protecting routes for User, Creator, and Admin roles.
+* Seamless Google Login integration.
 
 ### 🔍 Explore & Discover Prompts
-* Server-side search functionality by Prompt Title, Tags, and AI Tool[cite: 1].
-* Filter prompts by Category, AI Tool, and Difficulty Level[cite: 1].
-* Sorting options for Most Popular, Most Copied, and Latest prompts[cite: 1].
+* Server-side search functionality by Prompt Title, Tags, and AI Tool.
+* Filter prompts by Category, AI Tool, and Difficulty Level.
+* Sorting options for Most Popular, Most Copied, and Latest prompts.
 
 ### 💳 Premium Marketplace
-* One-time $5 payment system integrated with Stripe to unlock Premium access[cite: 1].
-* Content protection for private/premium prompts (locked content and copy prevention) until subscribed[cite: 1].
+* One-time $5 payment system integrated with Stripe to unlock Premium access.
+* Content protection for private/premium prompts (locked content and copy prevention) until subscribed.
 
 ### 💬 Interaction Features
-* Logged-in users can bookmark and copy prompts, increasing the copy count dynamically[cite: 1].
-* Users with access can leave reviews, give ratings, and report inappropriate content[cite: 1].
+* Logged-in users can bookmark and copy prompts, increasing the copy count dynamically.
+* Users with access can leave reviews, give ratings, and report inappropriate content.
 
 ### 📊 Analytics & Dashboards
-* **User Dashboard:** Manage added prompts, saved prompts, and submitted reviews[cite: 1].
-* **Creator Dashboard:** View Recharts-powered analytics for total copies and prompt growth[cite: 1].
-* **Admin Dashboard:** Full control over users, prompt moderation (approve/reject with feedback), payments data, and reported prompts[cite: 1].
+* **User Dashboard:** Manage added prompts, saved prompts, and submitted reviews.
+* **Creator Dashboard:** View Recharts-powered analytics for total copies and prompt growth.
+* **Admin Dashboard:** Full control over users, prompt moderation (approve/reject with feedback), payments data, and reported prompts.
 
 ---
 
@@ -55,11 +55,11 @@ The AI Prompt Sharing & Marketplace Platform allows users to create, discover, b
 ### Styling, UI & Animations
 * **Styling:** `tailwindcss`, `@tailwindcss/postcss`
 * **UI Components:** `@heroui/react`, `@heroui/styles`
-* **Animations:** `framer-motion` (Used in Banner, Featured Prompts, Reviews, etc.)[cite: 1]
+* **Animations:** `framer-motion` (Used in Banner, Featured Prompts, Reviews, etc.)
 
 ### Icons, Charts & Notifications
-* **Charts:** `recharts` (For dashboard analytics)[cite: 1]
-* **Notifications:** `react-hot-toast` (For showing success/error messages)[cite: 1]
+* **Charts:** `recharts` (For dashboard analytics)
+* **Notifications:** `react-hot-toast` (For showing success/error messages)
 * **Icons:** `lucide-react`, `@gravity-ui/icons`, `@iconify/react`
 
 ---
