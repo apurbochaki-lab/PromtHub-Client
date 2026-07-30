@@ -12,6 +12,7 @@ The AI Prompt Sharing & Marketplace Platform allows users to create, discover, b
 
 ## 🔗 Live URL
 **Live Demo:** [https://prompt-hub-client.vercel.app](#)
+**Backend Repo:** [https://github.com/apurbochaki-lab/PromptHub-server](#)
 
 ---
 
