@@ -11,6 +11,7 @@ const PromptDetailsPage = async ({ params }) => {
     const currentSessionUser = await getUserSession();
     const userId = currentSessionUser?.id;
     const promptDetails = await getPromptById(id, userId);
+    // console.log(promptDetails)
 
     // Recent reviews
     const recentReviews = await getRecentReviews(id);

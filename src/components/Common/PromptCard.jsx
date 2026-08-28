@@ -1,6 +1,8 @@
 import { Button, Card } from "@heroui/react";
 import Link from "next/link";
 import { Lock, Files, Star, Eye } from "@gravity-ui/icons";
+import Image from "next/image";
+
 
 const PromptCard = ({ prompt }) => {
     // MongoDB ID বের করে নেওয়া
@@ -12,7 +14,9 @@ const PromptCard = ({ prompt }) => {
         >
             {/* 1. Image Section */}
             <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
-                <img
+                <Image
+                    width={500}
+                    height={500}
                     alt={prompt.title}
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     loading="lazy"
@@ -33,10 +37,14 @@ const PromptCard = ({ prompt }) => {
 
                 {/* Top Right Badge: Premium Chip (Conditional) */}
                 {prompt.isPrivate && (
-                    <div className="absolute top-4 right-4">
-                        <span className="flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#ffffff] bg-gradient-to-r from-[#4e148c] to-[#6247aa] border border-[#a06cd5] rounded-full shadow-lg backdrop-blur-md">
-                            <Lock size={12} />
-                            Premium
+                    <div className="absolute top-4 right-4 z-10">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-[#0b3032]/95 px-3.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-cyan-100 shadow-[0_4px_18px_rgba(34,211,238,0.18)] backdrop-blur-md">
+                            <Lock
+                                size={11}
+                                strokeWidth={2.5}
+                                className="text-cyan-300"
+                            />
+                            <span className="text-cyan-300">Premium</span>
                         </span>
                     </div>
                 )}
